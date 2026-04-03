@@ -4,7 +4,7 @@ import { isSupabaseConfigured, supabase } from './client'
 export async function createContactInquiry(payload) {
   if (!isSupabaseConfigured || !supabase) {
     throw new Error(
-      'Supabase is not configured yet. Add VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to enable form submissions.',
+      'Supabase is not configured yet. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY to enable form submissions.',
     )
   }
 
