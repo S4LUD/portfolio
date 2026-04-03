@@ -144,7 +144,7 @@ function ContactModal({ open, onClose }) {
       />
 
       <div
-        className={`${surfaceClass} relative z-[1] w-[min(920px,100%)] rounded-[26px] bg-[rgba(255,255,255,0.96)] p-5 shadow-[0_24px_60px_rgba(103,124,168,0.22)] max-sm:max-h-[92vh] max-sm:overflow-y-auto max-sm:rounded-[22px] max-sm:p-4`}
+        className={`${surfaceClass} relative z-[1] w-[min(920px,100%)] rounded-[26px] bg-white p-5 shadow-[0_24px_60px_rgba(103,124,168,0.22)] max-sm:max-h-[92vh] max-sm:overflow-y-auto max-sm:rounded-[22px] max-sm:p-4`}
       >
         <button
           type="button"
