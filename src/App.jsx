@@ -4,6 +4,7 @@ import HeroSection from './components/sections/HeroSection/HeroSection'
 import SystemsOverviewSection from './components/sections/SystemsOverviewSection/SystemsOverviewSection'
 import ToolsStackSection from './components/sections/ToolsStackSection/ToolsStackSection'
 import ContactModal from './components/ui/ContactModal/ContactModal'
+import StackMarquee from './components/ui/StackMarquee/StackMarquee'
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false)
@@ -14,6 +15,7 @@ function App() {
     <main className="relative min-h-dvh overflow-hidden">
       <section className="relative z-10">
         <HeroSection />
+        <StackMarquee />
         <SystemsOverviewSection />
         <ToolsStackSection />
         <FloatingContactBar onOpenContact={openContact} />

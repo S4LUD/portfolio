@@ -4,6 +4,29 @@ export const heroStats = [
   'Build fast, automate early, scale cleanly.',
 ]
 
+export const marqueeStacks = [
+  { label: 'Vercel', icon: 'vercel' },
+  { label: 'Next.js', icon: 'nextdotjs' },
+  { label: 'React.js', icon: 'react' },
+  { label: 'Vite.js', icon: 'vite' },
+  { label: 'npm', icon: 'npm' },
+  { label: 'Bun', icon: 'bun' },
+  { label: 'Yarn', icon: 'yarn' },
+  { label: 'Expo', icon: 'expo' },
+  { label: 'Supabase', icon: 'supabase' },
+  { label: 'MongoDB Atlas', icon: 'mongodb' },
+  { label: 'Zapier', icon: 'zapier' },
+  { label: 'Make', icon: 'make' },
+  { label: 'n8n', icon: 'n8n' },
+  { label: 'Airtable', icon: 'airtable' },
+  { label: 'Google Sheets', icon: 'googlesheets' },
+  { label: 'Slack', icon: 'slack' },
+  { label: 'Gmail', icon: 'gmail' },
+  { label: 'Twilio', icon: 'twilio' },
+  { label: 'Postgres', icon: 'postgresql' },
+  { label: 'GraphQL', icon: 'graphql' },
+]
+
 export const overviewCards = [
   {
     title: 'Lead Qualification Pipeline',
@@ -20,7 +43,7 @@ export const overviewCards = [
   {
     title: 'Daily Metrics Aggregator',
     meta: 'Cross-platform reporting sync',
-    stack: ['Zapier', 'Google Sheets', 'Coda'],
+    stack: ['Zapier', 'Google Sheets', 'Supabase'],
     note: 'Runs every 15 minutes',
   },
 ]
@@ -33,20 +56,24 @@ export const caseStudyPoints = [
 
 export const stackGroups = [
   {
-    title: 'Orchestration',
-    items: ['Zapier', 'Make', 'n8n', 'IFTTT'],
+    title: 'Web & App',
+    items: ['Next.js', 'React.js', 'Vite.js', 'Expo'],
+  },
+  {
+    title: 'Runtime & Deploy',
+    items: ['Vercel', 'npm', 'Bun', 'Yarn'],
+  },
+  {
+    title: 'Automation',
+    items: ['Zapier', 'Make', 'n8n', 'Webhooks'],
   },
   {
     title: 'Data Layer',
-    items: ['Airtable', 'Sheets', 'Coda', 'Postgres'],
+    items: ['Supabase', 'MongoDB Atlas', 'Airtable', 'Google Sheets'],
   },
   {
     title: 'Communication',
-    items: ['Slack', 'Gmail', 'Twilio', 'Webhooks'],
-  },
-  {
-    title: 'API Integration',
-    items: ['REST', 'GraphQL', 'OAuth', 'SDKs'],
+    items: ['Slack', 'Gmail', 'Twilio'],
   },
 ]
 

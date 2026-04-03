@@ -49,3 +49,19 @@
     max-width: 100%;
   }
 }
+
+@layer components {
+  @keyframes stack-marquee-scroll {
+    from {
+      transform: translateX(0);
+    }
+
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .stack-marquee {
+    animation: stack-marquee-scroll 26s linear infinite;
+  }
+}
