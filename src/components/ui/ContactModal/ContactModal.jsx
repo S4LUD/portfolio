@@ -5,7 +5,6 @@ import { contactDetails } from '../../../data/portfolioData'
 import {
   createContactInquiry,
 } from '../../../lib/supabase/contactInquiries'
-import { isSupabaseConfigured } from '../../../lib/supabase/client'
 import { surfaceClass } from '../shared/uiClasses'
 import TurnstileWidget from '../TurnstileWidget/TurnstileWidget'
 
@@ -221,9 +220,6 @@ function ContactModal({ open, onClose }) {
               </label>
 
               <div className="grid gap-2">
-                <span className="text-[0.92rem] font-semibold text-[#465a7c]">
-                  Verification
-                </span>
                 <TurnstileWidget
                   siteKey={contactSiteKey}
                   onTokenChange={setTurnstileToken}
@@ -232,7 +228,7 @@ function ContactModal({ open, onClose }) {
                 />
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <button
                   type="submit"
                   disabled={isSubmitting || !turnstileToken}
@@ -241,12 +237,6 @@ function ContactModal({ open, onClose }) {
                   <Send className="h-4 w-4" />
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
-
-                <span className="text-[0.82rem] text-[#8190ab]">
-                  {isSupabaseConfigured
-                    ? 'Turnstile-verified submissions are sent through your Supabase function.'
-                    : 'Add your Supabase URL and publishable key to enable submissions.'}
-                </span>
               </div>
 
               {submitState.message ? (

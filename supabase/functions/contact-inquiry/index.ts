@@ -29,10 +29,10 @@ Deno.serve(async (req) => {
   try {
     const cloudflareSecretKey = Deno.env.get('CLOUDFLARE_SECRET_KEY')
     const supabaseUrl = Deno.env.get('SUPABASE_URL')
-    const supabaseSecretKey = Deno.env.get('SUPABASE_SECRET_KEY')
-    const contactTable = Deno.env.get('SUPABASE_CONTACT_TABLE') || 'contact_inquiries'
+    const appSupabaseSecretKey = Deno.env.get('APP_SUPABASE_SECRET_KEY')
+    const contactTable = Deno.env.get('CONTACT_TABLE') || 'contact_inquiries'
 
-    if (!cloudflareSecretKey || !supabaseUrl || !supabaseSecretKey) {
+    if (!cloudflareSecretKey || !supabaseUrl || !appSupabaseSecretKey) {
       return jsonResponse({ error: 'Server configuration is incomplete.' }, 500)
     }
 
@@ -108,7 +108,7 @@ Deno.serve(async (req) => {
       return jsonResponse({ error: 'Verification failed. Please try again.' }, 400)
     }
 
-    const supabase = createClient(supabaseUrl, supabaseSecretKey, {
+    const supabase = createClient(supabaseUrl, appSupabaseSecretKey, {
       auth: { persistSession: false },
     })
 
