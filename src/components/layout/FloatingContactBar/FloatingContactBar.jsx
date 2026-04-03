@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { surfaceClass } from '../../ui/shared/uiClasses'
 
 function FloatingContactBar({ onOpenContact }) {
@@ -23,4 +24,4 @@ function FloatingContactBar({ onOpenContact }) {
   )
 }
 
-export default FloatingContactBar
+export default memo(FloatingContactBar)

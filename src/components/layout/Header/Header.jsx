@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import logo from '../../../assets/logo.png'
 import { contentWidthClass } from '../../ui/shared/uiClasses'
 
@@ -13,4 +14,4 @@ function Header() {
   )
 }
 
-export default Header
+export default memo(Header)

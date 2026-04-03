@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { stackGroups } from '../../../data/portfolioData'
 import { contentWidthClass, sectionTitleClass, surfaceClass } from '../../ui/shared/uiClasses'
 
@@ -35,4 +36,4 @@ function ToolsStackSection() {
   )
 }
 
-export default ToolsStackSection
+export default memo(ToolsStackSection)

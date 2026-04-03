@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import logo from '../../../assets/logo.png'
 import {
   caseStudyPoints,
@@ -98,4 +99,4 @@ function SystemsOverviewSection() {
   )
 }
 
-export default SystemsOverviewSection
+export default memo(SystemsOverviewSection)

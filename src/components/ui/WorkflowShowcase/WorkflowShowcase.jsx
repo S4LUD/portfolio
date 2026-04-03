@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Minus, Square, X } from 'lucide-react'
 import { toneClasses } from '../shared/uiClasses'
 
@@ -80,4 +81,4 @@ function WorkflowShowcase({ workflow, className = '', imageSrc }) {
   )
 }
 
-export default WorkflowShowcase
+export default memo(WorkflowShowcase)

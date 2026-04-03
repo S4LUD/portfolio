@@ -1,5 +1,5 @@
 import { Download, Mail, Send, X } from 'lucide-react'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import cvFile from '../../../assets/Lance-Ivan-Salud-CV.pdf'
 import { contactDetails } from '../../../data/portfolioData'
 import {
@@ -7,6 +7,7 @@ import {
 } from '../../../lib/supabase/contactInquiries'
 import { isSupabaseConfigured } from '../../../lib/supabase/client'
 import { surfaceClass } from '../shared/uiClasses'
+import TurnstileWidget from '../TurnstileWidget/TurnstileWidget'
 
 const initialFormState = {
   name: '',
@@ -19,6 +20,9 @@ function ContactModal({ open, onClose }) {
   const [formState, setFormState] = useState(initialFormState)
   const [submitState, setSubmitState] = useState({ type: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState('')
+  const openedAtRef = useRef(Date.now())
+  const contactSiteKey = import.meta.env.VITE_CLOUDFLARE_SITE_KEY?.trim() ?? ''
 
   const contactEmail = import.meta.env.VITE_CONTACT_EMAIL?.trim() || contactDetails.email
   const isPlaceholderEmail = contactEmail === contactDetails.email
@@ -31,10 +35,28 @@ function ContactModal({ open, onClose }) {
     return `mailto:${contactEmail}?subject=${contactDetails.emailSubject}&body=${contactDetails.emailBody}`
   }, [contactEmail])
 
+  const handleTurnstileExpired = useCallback(() => {
+    setSubmitState({
+      type: 'error',
+      message: 'Verification expired. Please complete it again.',
+    })
+  }, [])
+
+  const handleTurnstileError = useCallback(() => {
+    setSubmitState({
+      type: 'error',
+      message: 'Verification failed to load. Please try again.',
+    })
+  }, [])
+
   useEffect(() => {
     if (!open) {
       return undefined
     }
+
+    openedAtRef.current = Date.now()
+    setTurnstileToken('')
+    setSubmitState({ type: '', message: '' })
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
@@ -67,6 +89,16 @@ function ContactModal({ open, onClose }) {
   const handleSubmit = async (event) => {
     event.preventDefault()
 
+    const elapsedSeconds = Math.round((Date.now() - openedAtRef.current) / 1000)
+
+    if (!turnstileToken) {
+      setSubmitState({
+        type: 'error',
+        message: 'Complete the bot check before sending your message.',
+      })
+      return
+    }
+
     setIsSubmitting(true)
     setSubmitState({ type: '', message: '' })
 
@@ -77,9 +109,12 @@ function ContactModal({ open, onClose }) {
         company: formState.company,
         message: formState.message,
         source: 'portfolio',
+        turnstileToken,
+        submittedAfterSeconds: elapsedSeconds,
       })
 
       setFormState(initialFormState)
+      setTurnstileToken('')
       setSubmitState({
         type: 'success',
         message: 'Your message was sent successfully.',
@@ -185,10 +220,22 @@ function ContactModal({ open, onClose }) {
                 />
               </label>
 
+              <div className="grid gap-2">
+                <span className="text-[0.92rem] font-semibold text-[#465a7c]">
+                  Verification
+                </span>
+                <TurnstileWidget
+                  siteKey={contactSiteKey}
+                  onTokenChange={setTurnstileToken}
+                  onExpired={handleTurnstileExpired}
+                  onError={handleTurnstileError}
+                />
+              </div>
+
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || !turnstileToken}
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-linear-to-br from-[#6b98ff] to-[#4d72e8] px-5 font-semibold text-white shadow-[0_12px_24px_rgba(92,130,229,0.24)] transition-transform duration-200 hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   <Send className="h-4 w-4" />
@@ -197,8 +244,8 @@ function ContactModal({ open, onClose }) {
 
                 <span className="text-[0.82rem] text-[#8190ab]">
                   {isSupabaseConfigured
-                    ? 'Form submissions go straight to your Supabase table.'
-                    : 'Add Supabase env keys to enable form capture.'}
+                    ? 'Turnstile-verified submissions are sent through your Supabase function.'
+                    : 'Add your Supabase URL and publishable key to enable submissions.'}
                 </span>
               </div>
 

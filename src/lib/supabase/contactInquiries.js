@@ -8,8 +8,10 @@ export async function createContactInquiry(payload) {
     )
   }
 
-  const tableName = import.meta.env.VITE_SUPABASE_CONTACT_TABLE || contactDetails.formTable
-  const { error } = await supabase.from(tableName).insert(payload)
+  const functionName = import.meta.env.VITE_SUPABASE_CONTACT_FUNCTION || contactDetails.functionName
+  const { error } = await supabase.functions.invoke(functionName, {
+    body: payload,
+  })
 
   if (error) {
     throw new Error(error.message || 'Failed to submit contact form.')

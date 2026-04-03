@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import FloatingContactBar from './components/layout/FloatingContactBar/FloatingContactBar'
 import HeroSection from './components/sections/HeroSection/HeroSection'
 import SystemsOverviewSection from './components/sections/SystemsOverviewSection/SystemsOverviewSection'
@@ -7,6 +7,8 @@ import ContactModal from './components/ui/ContactModal/ContactModal'
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false)
+  const openContact = useCallback(() => setIsContactOpen(true), [])
+  const closeContact = useCallback(() => setIsContactOpen(false), [])
 
   return (
     <main className="relative min-h-dvh overflow-hidden">
@@ -14,9 +16,9 @@ function App() {
         <HeroSection />
         <SystemsOverviewSection />
         <ToolsStackSection />
-        <FloatingContactBar onOpenContact={() => setIsContactOpen(true)} />
+        <FloatingContactBar onOpenContact={openContact} />
       </section>
-      <ContactModal open={isContactOpen} onClose={() => setIsContactOpen(false)} />
+      <ContactModal open={isContactOpen} onClose={closeContact} />
     </main>
   )
 }

@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import logo from '../../../assets/logo.png'
 import sampleFlow from '../../../assets/sample_flow.png'
 import { heroStats, heroWorkflow } from '../../../data/portfolioData'
@@ -78,4 +79,4 @@ function HeroSection() {
   )
 }
 
-export default HeroSection
+export default memo(HeroSection)

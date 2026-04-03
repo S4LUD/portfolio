@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 function NestedPanel({
   className,
   toolbarHeight = 'h-9',
@@ -14,4 +16,4 @@ function NestedPanel({
   )
 }
 
-export default NestedPanel
+export default memo(NestedPanel)
