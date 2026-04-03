@@ -50,6 +50,8 @@ function ContactModal({ open, onClose }) {
 
   useEffect(() => {
     if (!open) {
+      setSubmitState({ type: '', message: '' })
+      setTurnstileToken('')
       return undefined
     }
 
@@ -118,6 +120,7 @@ function ContactModal({ open, onClose }) {
         type: 'success',
         message: 'Your message was sent successfully.',
       })
+      onClose()
     } catch (error) {
       setSubmitState({
         type: 'error',
@@ -253,7 +256,7 @@ function ContactModal({ open, onClose }) {
             </div>
           </form>
 
-          <div className="grid gap-4">
+          <div className="grid content-start gap-4">
             <div className="rounded-[22px] bg-[#fbfdff] p-4 shadow-[inset_0_0_0_1px_rgba(228,234,245,0.8)]">
               <h3 className="m-0 text-[1.02rem] font-bold text-[#32425f]">Quick actions</h3>
               <div className="mt-4 grid gap-3">
