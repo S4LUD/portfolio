@@ -1,0 +1,51 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bark-950: #2d2212;
+  --color-bark-900: #3a2e19;
+  --color-bark-700: #5a4a2f;
+  --color-moss-700: #5e6f43;
+  --color-moss-600: #73875d;
+  --color-cream-50: #fef9e9;
+  --color-cream-100: #f6eed9;
+  --color-cream-200: #eee8d5;
+}
+
+@layer base {
+  :root {
+    font-family: 'Segoe UI', 'Aptos', 'Trebuchet MS', sans-serif;
+    color: #33415c;
+    background: #ffffff;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    background: #ffffff;
+  }
+
+  a,
+  button {
+    font: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+}
