@@ -1,6 +1,7 @@
 export const heroStats = [
-  'Scalable workflows across APIs and no-code platforms',
-  'Custom automation layers for lead ops, support, and reporting',
+  'Agile implementation from rough idea to working product.',
+  'Websites, mobile apps, and automation that actually ship.',
+  'Build fast, automate early, scale cleanly.',
 ]
 
 export const overviewCards = [

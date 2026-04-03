@@ -49,12 +49,11 @@ function HeroSection() {
         </div>
 
         <div className="relative z-[1] flex flex-col justify-center py-[2.1rem] max-sm:py-4">
-          <h1 className="m-0 max-w-[10ch] text-[clamp(2.5rem,5vw,4.3rem)] leading-[0.95] font-bold tracking-[-0.05em] text-[#32425f] max-sm:max-w-none max-sm:text-[2.8rem]">
-            Automation Systems Engineer
+          <h1 className="m-0 max-w-[12ch] text-[clamp(2.5rem,5vw,4.3rem)] leading-[0.95] font-bold tracking-[-0.05em] text-[#32425f] max-sm:max-w-none max-sm:text-[2.8rem]">
+            Systems Builder for Web, Mobile, and Automation
           </h1>
           <p className="mt-4 mb-5 max-w-[28rem] text-[1.02rem] leading-7 text-[#6f7f9c]">
-            Designing scalable workflows across APIs, no-code platforms, and custom logic
-            layers.
+            Need a website, app, or automation? Let&apos;s build it.
           </p>
 
           <ul className="mb-6 grid list-none gap-[0.65rem] p-0">
