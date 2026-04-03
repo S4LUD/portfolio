@@ -49,6 +49,14 @@ export const stackGroups = [
   },
 ]
 
+export const contactDetails = {
+  email: 'your-email@example.com',
+  emailSubject: 'Portfolio Inquiry',
+  emailBody:
+    "Hi Lance,%0D%0A%0D%0AI'd love to connect about your automation and software work.%0D%0A%0D%0AThanks,",
+  formTable: 'contact_inquiries',
+}
+
 export const heroWorkflow = {
   tall: true,
   nodes: [
