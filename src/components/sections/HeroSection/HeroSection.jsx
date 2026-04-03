@@ -1,7 +1,8 @@
 import { memo } from 'react'
 import logo from '../../../assets/logo.png'
-import sampleFlow from '../../../assets/sample_flow.png'
-import { heroStats, heroWorkflow } from '../../../data/portfolioData'
+import sampleFlow1 from '../../../assets/sample_flow_1.png'
+import sampleFlow2 from '../../../assets/sample_flow_2.png'
+import { heroStats } from '../../../data/portfolioData'
 import Header from '../../layout/Header/Header'
 import NestedPanel from '../../ui/NestedPanel/NestedPanel'
 import WorkflowShowcase from '../../ui/WorkflowShowcase/WorkflowShowcase'
@@ -32,25 +33,30 @@ function HeroSection() {
       <Header />
 
       <section
-        className={`relative grid grid-cols-[minmax(0,0.92fr)_minmax(0,1.45fr)] gap-[1.2rem] rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
+        className={`relative grid items-start grid-cols-[minmax(0,0.92fr)_minmax(0,1.45fr)] gap-[1.2rem] rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
       >
         <div className="pointer-events-none absolute inset-x-0 top-18 bottom-0 z-0 max-md:hidden">
-          <NestedPanel className="absolute left-[28%] top-[42%] h-[58%] w-[26%] rounded-[22px] border border-[rgba(228,234,245,0.8)] bg-[rgba(255,255,255,0.64)] [background-image:radial-gradient(rgba(224,230,242,0.54)_2px,transparent_2px)] [background-size:24px_24px] backdrop-blur-[6px]" />
           <NestedPanel
-            className="absolute left-[16%] top-[64%] h-[34%] w-[22%] rounded-[20px] border border-[rgba(228,234,245,0.78)] bg-[rgba(255,255,255,0.56)] [background-image:radial-gradient(rgba(224,230,242,0.5)_2px,transparent_2px)] [background-size:24px_24px] backdrop-blur-[5px]"
+            className="absolute left-[28%] top-[42%] h-[58%] w-[26%] rounded-[22px] border border-[rgba(228,234,245,0.8)] bg-[rgba(255,255,255,0.64)] backdrop-blur-[6px]"
+            bodyClass="[background-image:radial-gradient(rgba(224,230,242,0.54)_2px,transparent_2px)] [background-size:24px_24px]"
+          />
+          <NestedPanel
+            className="absolute left-[16%] top-[64%] h-[34%] w-[22%] rounded-[20px] border border-[rgba(228,234,245,0.78)] bg-[rgba(255,255,255,0.56)] backdrop-blur-[5px]"
+            bodyClass="[background-image:radial-gradient(rgba(224,230,242,0.5)_2px,transparent_2px)] [background-size:24px_24px]"
             toolbarHeight="h-8"
             dotSize="h-[0.3rem] w-[0.3rem]"
           />
           <NestedPanel
-            className="absolute left-[18%] bottom-[-18%] h-[26%] w-[16%] rounded-[18px] border border-[rgba(228,234,245,0.74)] bg-[rgba(255,255,255,0.48)] [background-image:radial-gradient(rgba(224,230,242,0.46)_2px,transparent_2px)] [background-size:24px_24px] backdrop-blur-[5px]"
+            className="absolute left-[18%] bottom-[-18%] h-[26%] w-[16%] rounded-[18px] border border-[rgba(228,234,245,0.74)] bg-[rgba(255,255,255,0.48)] backdrop-blur-[5px]"
+            bodyClass="[background-image:radial-gradient(rgba(224,230,242,0.46)_2px,transparent_2px)] [background-size:24px_24px]"
             toolbarHeight="h-8"
             dotSize="h-[0.3rem] w-[0.3rem]"
           />
         </div>
 
         <div className="relative z-[1] flex flex-col justify-center py-[2.1rem] max-sm:py-4">
-          <h1 className="m-0 max-w-[12ch] text-[clamp(2.5rem,5vw,4.3rem)] leading-[0.95] font-bold tracking-[-0.05em] text-[#32425f] max-sm:max-w-none max-sm:text-[2.8rem]">
-            Systems Builder for Web, Mobile, and Automation
+          <h1 className="m-0 max-w-[8ch] text-[clamp(2.5rem,5vw,4.3rem)] leading-[0.95] font-bold tracking-[-0.05em] text-[#32425f] max-sm:max-w-none max-sm:text-[2.8rem]">
+            Web, Mobile & Automation
           </h1>
           <p className="mt-4 mb-5 max-w-[28rem] text-[1.02rem] leading-7 text-[#6f7f9c]">
             Need a website, app, or automation? Let&apos;s build it.
@@ -69,9 +75,8 @@ function HeroSection() {
         </div>
 
         <WorkflowShowcase
-          workflow={heroWorkflow}
-          imageSrc={sampleFlow}
-          className="relative z-[1] w-full p-[1.1rem] max-sm:p-4"
+          imageSources={[sampleFlow1, sampleFlow2]}
+          className="relative z-[1] w-full self-start p-[1.1rem] max-sm:p-4"
         />
       </section>
     </section>
