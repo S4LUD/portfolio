@@ -50,12 +50,6 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                 : 'min-h-[19rem] max-sm:min-h-64'
         }`}
       >
-        <div
-          className={`pointer-events-none absolute inset-0 z-0 opacity-70 [background-image:radial-gradient(var(--panel-dot-color)_2px,transparent_2px)] [background-size:18px_18px] ${
-            hasCustomContent ? 'hidden' : ''
-          }`}
-        />
-
         {hasCustomContent ? children : null}
 
         {hasSlides ? (

@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import FloatingContactBar from './components/layout/FloatingContactBar/FloatingContactBar'
 import HeroSection from './components/sections/HeroSection/HeroSection'
-import SystemsOverviewSection from './components/sections/SystemsOverviewSection/SystemsOverviewSection'
-import ToolsStackSection from './components/sections/ToolsStackSection/ToolsStackSection'
 import ContactModal from './components/ui/ContactModal/ContactModal'
 import StackMarquee from './components/ui/StackMarquee/StackMarquee'
 
@@ -66,11 +64,9 @@ function App() {
 
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[var(--app-bg)] text-[var(--text-strong)]">
-      <section className="relative z-10">
+      <section className="relative z-10 pb-[6.25rem] max-sm:pb-[calc(env(safe-area-inset-bottom)+7.25rem)]">
         <HeroSection themePreference={themePreference} onThemeChange={updateThemePreference} />
         <StackMarquee />
-        <SystemsOverviewSection />
-        <ToolsStackSection />
         <FloatingContactBar onOpenContact={openContact} />
       </section>
       <ContactModal open={isContactOpen} onClose={closeContact} />

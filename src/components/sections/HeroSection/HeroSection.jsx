@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import logo from '../../../assets/logo.png'
 import sampleFlow1 from '../../../assets/sample_flow_1.png'
 import sampleFlow2 from '../../../assets/sample_flow_2.png'
 import { heroStats } from '../../../data/portfolioData'
@@ -14,41 +13,23 @@ function HeroSection({ themePreference, onThemeChange }) {
       className="relative overflow-hidden pt-0 pb-6 backdrop-blur-[6px] max-sm:pb-4"
       style={{
         backgroundColor: 'var(--hero-bg)',
-        backgroundImage: `linear-gradient(var(--hero-overlay), var(--hero-overlay)), url(${logo})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '64px',
-        backgroundPosition: '0 0',
+        backgroundImage: `linear-gradient(var(--hero-overlay), var(--hero-overlay))`,
       }}
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.011] md:hidden"
-        style={{
-          backgroundImage: `url(${logo})`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '64px',
-          backgroundPosition: '0 0',
-        }}
-      />
-
       <Header themePreference={themePreference} onThemeChange={onThemeChange} />
 
       <section
         className={`relative grid items-start grid-cols-[minmax(0,0.92fr)_minmax(0,1.45fr)] gap-[1.2rem] rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
       >
         <div className="pointer-events-none absolute inset-x-0 top-18 bottom-0 z-0 max-md:hidden">
+          <NestedPanel className="absolute left-[28%] top-[42%] h-[58%] w-[26%] rounded-[22px] border border-[var(--nested-panel-border)] bg-[var(--nested-panel-bg)] backdrop-blur-[6px]" />
           <NestedPanel
-            className="absolute left-[28%] top-[42%] h-[58%] w-[26%] rounded-[22px] border border-[var(--panel-border)] bg-[var(--nested-panel-bg)] backdrop-blur-[6px]"
-            bodyClass="[background-image:radial-gradient(var(--panel-dot-color)_2px,transparent_2px)] [background-size:24px_24px]"
-          />
-          <NestedPanel
-            className="absolute left-[16%] top-[64%] h-[34%] w-[22%] rounded-[20px] border border-[var(--panel-border)] bg-[var(--nested-panel-bg-soft)] backdrop-blur-[5px]"
-            bodyClass="[background-image:radial-gradient(var(--panel-dot-color-soft)_2px,transparent_2px)] [background-size:24px_24px]"
+            className="absolute left-[16%] top-[64%] h-[34%] w-[22%] rounded-[20px] border border-[var(--nested-panel-border)] bg-[var(--nested-panel-bg-soft)] backdrop-blur-[5px]"
             toolbarHeight="h-8"
             dotSize="h-[0.3rem] w-[0.3rem]"
           />
           <NestedPanel
-            className="absolute left-[18%] bottom-[-18%] h-[26%] w-[16%] rounded-[18px] border border-[var(--panel-border)] bg-[var(--nested-panel-bg-faint)] backdrop-blur-[5px]"
-            bodyClass="[background-image:radial-gradient(var(--panel-dot-color-soft)_2px,transparent_2px)] [background-size:24px_24px]"
+            className="absolute left-[18%] bottom-[-18%] h-[26%] w-[16%] rounded-[18px] border border-[var(--nested-panel-border)] bg-[var(--nested-panel-bg-faint)] backdrop-blur-[5px]"
             toolbarHeight="h-8"
             dotSize="h-[0.3rem] w-[0.3rem]"
           />

@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import logo from '../../../assets/logo.png'
 import {
   caseStudyPoints,
   detailWorkflow,
@@ -14,22 +13,9 @@ function SystemsOverviewSection() {
       className="relative overflow-hidden pt-7 pb-56 max-sm:pt-5 max-sm:pb-48"
       style={{
         backgroundColor: 'var(--section-bg)',
-        backgroundImage: `linear-gradient(var(--section-overlay), var(--section-overlay)), url(${logo})`,
-        backgroundRepeat: 'repeat',
-        backgroundSize: '64px',
-        backgroundPosition: '0 0',
+        backgroundImage: `linear-gradient(var(--section-overlay), var(--section-overlay))`,
       }}
     >
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.011] md:hidden"
-        style={{
-          backgroundImage: `url(${logo})`,
-          backgroundRepeat: 'repeat',
-          backgroundSize: '64px',
-          backgroundPosition: '0 0',
-        }}
-      />
-
       <section
         className={`relative mb-6 grid grid-cols-[minmax(0,1.08fr)_minmax(0,0.92fr)] gap-[1.2rem] rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
       >
