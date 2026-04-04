@@ -144,25 +144,25 @@ function ContactModal({ open, onClose }) {
       />
 
       <div
-        className={`${surfaceClass} relative z-[1] w-[min(920px,100%)] rounded-[26px] bg-white p-5 shadow-[0_24px_60px_rgba(103,124,168,0.22)] max-sm:max-h-[92vh] max-sm:overflow-y-auto max-sm:rounded-[22px] max-sm:p-4`}
+        className={`${surfaceClass} relative z-[1] w-[min(920px,100%)] rounded-[26px] bg-[var(--modal-bg)] p-5 shadow-[0_24px_60px_var(--panel-shadow)] max-sm:max-h-[92vh] max-sm:overflow-y-auto max-sm:rounded-[22px] max-sm:p-4`}
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[#f2f6ff] text-[#5d739a] transition-colors duration-200 hover:bg-[#e8eefb]"
+          className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] transition-colors duration-200 hover:bg-[var(--theme-toggle-hover-bg)]"
           aria-label="Close contact modal"
         >
           <X className="h-4 w-4" />
         </button>
 
         <div className="mb-5 max-w-[36rem] pr-12">
-          <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[#5b79aa]">
+          <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
             Get In Touch
           </p>
-          <h2 className="m-0 text-[clamp(1.45rem,2.4vw,2rem)] leading-[1.15] font-bold text-[#32425f]">
+          <h2 className="m-0 text-[clamp(1.45rem,2.4vw,2rem)] leading-[1.15] font-bold text-[var(--text-strong)]">
             Pick the fastest way to reach out.
           </h2>
-          <p className="mt-3 mb-0 text-[0.98rem] leading-7 text-[#7183a2]">
+          <p className="mt-3 mb-0 text-[0.98rem] leading-7 text-[var(--text-muted)]">
             Send a quick message, open a direct email draft, or download the latest CV.
           </p>
         </div>
@@ -170,10 +170,10 @@ function ContactModal({ open, onClose }) {
         <div className="grid grid-cols-[minmax(0,1.25fr)_minmax(260px,0.75fr)] gap-4 max-md:grid-cols-1">
           <form
             onSubmit={handleSubmit}
-            className="rounded-[22px] bg-[#fbfdff] p-4 shadow-[inset_0_0_0_1px_rgba(228,234,245,0.8)]"
+            className="rounded-[22px] bg-[var(--modal-subtle-bg)] p-4 shadow-[inset_0_0_0_1px_var(--panel-border)]"
           >
             <div className="grid gap-4">
-              <label className="grid gap-2 text-[0.92rem] font-semibold text-[#465a7c]">
+              <label className="grid gap-2 text-[0.92rem] font-semibold text-[var(--text-soft)]">
                 Name
                 <input
                   type="text"
@@ -181,12 +181,12 @@ function ContactModal({ open, onClose }) {
                   value={formState.name}
                   onChange={handleChange}
                   required
-                  className="min-h-12 rounded-[16px] border border-[rgba(225,233,246,0.95)] bg-white px-4 text-[#32425f] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_rgba(107,152,255,0.15)]"
+                  className="min-h-12 rounded-[16px] border border-[var(--panel-border)] bg-[var(--input-bg)] px-4 text-[var(--text-strong)] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_var(--input-focus-ring)]"
                 />
               </label>
 
               <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
-                <label className="grid gap-2 text-[0.92rem] font-semibold text-[#465a7c]">
+                <label className="grid gap-2 text-[0.92rem] font-semibold text-[var(--text-soft)]">
                   Email
                   <input
                     type="email"
@@ -194,23 +194,23 @@ function ContactModal({ open, onClose }) {
                     value={formState.email}
                     onChange={handleChange}
                     required
-                    className="min-h-12 rounded-[16px] border border-[rgba(225,233,246,0.95)] bg-white px-4 text-[#32425f] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_rgba(107,152,255,0.15)]"
+                    className="min-h-12 rounded-[16px] border border-[var(--panel-border)] bg-[var(--input-bg)] px-4 text-[var(--text-strong)] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_var(--input-focus-ring)]"
                   />
                 </label>
 
-                <label className="grid gap-2 text-[0.92rem] font-semibold text-[#465a7c]">
+                <label className="grid gap-2 text-[0.92rem] font-semibold text-[var(--text-soft)]">
                   Company
                   <input
                     type="text"
                     name="company"
                     value={formState.company}
                     onChange={handleChange}
-                    className="min-h-12 rounded-[16px] border border-[rgba(225,233,246,0.95)] bg-white px-4 text-[#32425f] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_rgba(107,152,255,0.15)]"
+                    className="min-h-12 rounded-[16px] border border-[var(--panel-border)] bg-[var(--input-bg)] px-4 text-[var(--text-strong)] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_var(--input-focus-ring)]"
                   />
                 </label>
               </div>
 
-              <label className="grid gap-2 text-[0.92rem] font-semibold text-[#465a7c]">
+              <label className="grid gap-2 text-[0.92rem] font-semibold text-[var(--text-soft)]">
                 Message
                 <textarea
                   name="message"
@@ -218,7 +218,7 @@ function ContactModal({ open, onClose }) {
                   onChange={handleChange}
                   required
                   rows="6"
-                  className="rounded-[16px] border border-[rgba(225,233,246,0.95)] bg-white px-4 py-3 text-[#32425f] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_rgba(107,152,255,0.15)]"
+                  className="rounded-[16px] border border-[var(--panel-border)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-strong)] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_var(--input-focus-ring)]"
                 />
               </label>
 
@@ -235,7 +235,7 @@ function ContactModal({ open, onClose }) {
                 <button
                   type="submit"
                   disabled={isSubmitting || !turnstileToken}
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-linear-to-br from-[#6b98ff] to-[#4d72e8] px-5 font-semibold text-white shadow-[0_12px_24px_rgba(92,130,229,0.24)] transition-transform duration-200 hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-linear-to-br from-[var(--button-primary-from)] to-[var(--button-primary-to)] px-5 font-semibold text-white shadow-[0_12px_24px_var(--button-primary-shadow)] transition-transform duration-200 hover:-translate-y-px disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   <Send className="h-4 w-4" />
                   {isSubmitting ? 'Sending...' : 'Send Message'}
@@ -257,8 +257,8 @@ function ContactModal({ open, onClose }) {
           </form>
 
           <div className="grid content-start gap-4">
-            <div className="rounded-[22px] bg-[#fbfdff] p-4 shadow-[inset_0_0_0_1px_rgba(228,234,245,0.8)]">
-              <h3 className="m-0 text-[1.02rem] font-bold text-[#32425f]">Quick actions</h3>
+            <div className="rounded-[22px] bg-[var(--modal-subtle-bg)] p-4 shadow-[inset_0_0_0_1px_var(--panel-border)]">
+              <h3 className="m-0 text-[1.02rem] font-bold text-[var(--text-strong)]">Quick actions</h3>
               <div className="mt-4 grid gap-3">
                 <a
                   href={isPlaceholderEmail ? undefined : mailtoHref}
@@ -270,7 +270,7 @@ function ContactModal({ open, onClose }) {
                   className={`inline-flex min-h-12 items-center justify-between rounded-[18px] px-4 py-3 no-underline transition-colors duration-200 ${
                     isPlaceholderEmail
                       ? 'cursor-not-allowed bg-[#f4f6fb] text-[#95a3bc]'
-                      : 'bg-white text-[#465a7c] shadow-[inset_0_0_0_1px_rgba(228,234,245,0.9)] hover:bg-[#f7faff]'
+                      : 'bg-[var(--input-bg)] text-[var(--text-soft)] shadow-[inset_0_0_0_1px_var(--panel-border)] hover:bg-[var(--theme-toggle-hover-bg)]'
                   }`}
                 >
                   <span className="inline-flex items-center gap-3">
@@ -285,7 +285,7 @@ function ContactModal({ open, onClose }) {
                 <a
                   href={cvFile}
                   download="Lance-Ivan-Salud-CV.pdf"
-                  className="inline-flex min-h-12 items-center justify-between rounded-[18px] bg-white px-4 py-3 text-[#465a7c] no-underline shadow-[inset_0_0_0_1px_rgba(228,234,245,0.9)] transition-colors duration-200 hover:bg-[#f7faff]"
+                  className="inline-flex min-h-12 items-center justify-between rounded-[18px] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-soft)] no-underline shadow-[inset_0_0_0_1px_var(--panel-border)] transition-colors duration-200 hover:bg-[var(--theme-toggle-hover-bg)]"
                 >
                   <span className="inline-flex items-center gap-3">
                     <Download className="h-4 w-4" />

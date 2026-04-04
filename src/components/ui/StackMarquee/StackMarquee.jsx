@@ -3,11 +3,11 @@ import { marqueeStacks } from '../../../data/portfolioData'
 import { contentWidthClass } from '../shared/uiClasses'
 
 function StackChip({ item }) {
-  const src = `https://cdn.simpleicons.org/${item.icon}`
+  const src = item.src ?? `https://cdn.simpleicons.org/${item.icon}`
 
   return (
     <div
-      className="flex h-12 shrink-0 items-center justify-center text-[#4f648d] transition-transform duration-200 hover:-translate-y-0.5"
+      className="flex h-12 shrink-0 items-center justify-center text-[var(--text-soft)] transition-transform duration-200 hover:-translate-y-0.5"
       title={item.label}
       aria-label={item.label}
     >

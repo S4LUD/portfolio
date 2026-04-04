@@ -13,8 +13,8 @@ function SystemsOverviewSection() {
     <section
       className="relative overflow-hidden pt-7 pb-56 max-sm:pt-5 max-sm:pb-48"
       style={{
-        backgroundColor: '#ffffff',
-        backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.99), rgba(255, 255, 255, 0.99)), url(${logo})`,
+        backgroundColor: 'var(--section-bg)',
+        backgroundImage: `linear-gradient(var(--section-overlay), var(--section-overlay)), url(${logo})`,
         backgroundRepeat: 'repeat',
         backgroundSize: '64px',
         backgroundPosition: '0 0',
@@ -35,7 +35,7 @@ function SystemsOverviewSection() {
       >
         <div className="grid gap-4">
           <div className="py-1">
-            <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[#5b79aa]">
+            <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
               Systems Overview
             </p>
             <h2 className={`${sectionTitleClass} max-w-[36rem]`}>
@@ -48,13 +48,13 @@ function SystemsOverviewSection() {
             {overviewCards.map((card) => (
               <article key={card.title} className={`${surfaceClass} p-[1.1rem_1.15rem] max-sm:p-4`}>
                 <div>
-                  <h3 className="m-0 text-[1.1rem] font-bold text-[#32425f]">{card.title}</h3>
-                  <p className="mt-[0.35rem] mb-0 text-[0.94rem] text-[#7183a2]">{card.meta}</p>
+                  <h3 className="m-0 text-[1.1rem] font-bold text-[var(--text-strong)]">{card.title}</h3>
+                  <p className="mt-[0.35rem] mb-0 text-[0.94rem] text-[var(--text-muted)]">{card.meta}</p>
                   <div className="mt-[0.85rem] flex flex-wrap gap-[0.45rem]">
                     {card.stack.map((item) => (
                       <span
                         key={item}
-                        className="inline-flex min-h-8 items-center justify-center rounded-full bg-[rgba(239,244,255,0.96)] px-[0.8rem] text-[0.82rem] font-bold text-[#5d739a] shadow-[0_6px_18px_rgba(185,198,226,0.16)]"
+                        className="inline-flex min-h-8 items-center justify-center rounded-full bg-[var(--chip-bg)] px-[0.8rem] text-[0.82rem] font-bold text-[var(--chip-text)] shadow-[0_6px_18px_var(--soft-shadow)]"
                       >
                         {item}
                       </span>
@@ -63,11 +63,11 @@ function SystemsOverviewSection() {
                 </div>
 
                 <div className="mt-4 flex items-center justify-between gap-4 max-sm:flex-col max-sm:items-start">
-                  <span className="text-[0.85rem] text-[#8190ab]">{card.note}</span>
+                  <span className="text-[0.85rem] text-[var(--text-faint)]">{card.note}</span>
                   <a
                     href="/"
                     onClick={(event) => event.preventDefault()}
-                    className="inline-flex min-h-[2.2rem] items-center justify-center rounded-full bg-[#eef4ff] px-[0.95rem] font-bold text-[#6180bd] no-underline transition-transform duration-200 hover:-translate-y-px"
+                    className="inline-flex min-h-[2.2rem] items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-[0.95rem] font-bold text-[var(--button-subtle-text)] no-underline transition-transform duration-200 hover:-translate-y-px"
                   >
                     View Flow
                   </a>
@@ -81,13 +81,13 @@ function SystemsOverviewSection() {
           <WorkflowShowcase workflow={detailWorkflow} />
 
           <article className={`${surfaceClass} p-[1.35rem] max-sm:p-4`}>
-            <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[#5b79aa]">
+            <p className="mb-2 text-[0.82rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
               Case Study
             </p>
-            <h3 className="mt-[0.15rem] mb-[0.85rem] text-[1.25rem] font-bold text-[#32425f]">
+            <h3 className="mt-[0.15rem] mb-[0.85rem] text-[1.25rem] font-bold text-[var(--text-strong)]">
               Intake to outreach in one connected path
             </h3>
-            <ul className="m-0 grid gap-[0.7rem] pl-[1.1rem] leading-6 text-[#7183a2]">
+            <ul className="m-0 grid gap-[0.7rem] pl-[1.1rem] leading-6 text-[var(--text-muted)]">
               {caseStudyPoints.map((point) => (
                 <li key={point}>{point}</li>
               ))}

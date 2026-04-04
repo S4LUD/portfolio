@@ -23,21 +23,21 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
 
   return (
     <article
-      className={`relative rounded-[22px] border border-[rgba(228,234,245,0.9)] bg-white p-4 shadow-[0_18px_45px_rgba(150,169,204,0.18),inset_0_1px_0_rgba(255,255,255,0.8)] ${className}`.trim()}
+      className={`relative rounded-[22px] border border-[var(--panel-border)] bg-[var(--workflow-panel-bg)] p-4 shadow-[0_18px_45px_var(--panel-shadow),inset_0_1px_0_var(--panel-inset)] ${className}`.trim()}
     >
       <div className="flex items-center justify-between px-2 pb-3">
         <div className="flex items-center gap-2" aria-hidden="true">
-          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[#d4ddef]" />
-          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[#d4ddef]" />
-          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[#d4ddef]" />
+          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[var(--toolbar-dot)]" />
+          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[var(--toolbar-dot)]" />
+          <span className="h-[0.36rem] w-[0.36rem] rounded-full bg-[var(--toolbar-dot)]" />
         </div>
-        <div className="flex items-center gap-2 text-[#d4ddef]" aria-hidden="true">
+        <div className="flex items-center gap-2 text-[var(--toolbar-dot)]" aria-hidden="true">
           <Minus className="h-3.5 w-3.5 stroke-[2.2]" />
           <Square className="h-3.5 w-3.5 stroke-[1.8]" />
           <X className="h-3.5 w-3.5 stroke-[2.1]" />
         </div>
       </div>
-      <div className="mx-[-1rem] border-b border-[rgba(228,234,245,0.9)]" />
+      <div className="mx-[-1rem] border-b border-[var(--panel-border)]" />
 
       <div
         className={`relative mt-4 overflow-hidden rounded-[18px] ${
@@ -49,13 +49,18 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                 ? 'min-h-[23rem] max-sm:min-h-64'
                 : 'min-h-[19rem] max-sm:min-h-64'
         }`}
-        style={{ backgroundColor: '#ffffff' }}
       >
+        <div
+          className={`pointer-events-none absolute inset-0 z-0 opacity-70 [background-image:radial-gradient(var(--panel-dot-color)_2px,transparent_2px)] [background-size:18px_18px] ${
+            hasCustomContent ? 'hidden' : ''
+          }`}
+        />
+
         {hasCustomContent ? children : null}
 
         {hasSlides ? (
           <div
-            className="relative h-[20rem] max-sm:h-auto"
+            className="relative z-[1] h-[20rem] max-sm:h-auto"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
@@ -68,7 +73,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                   <img
                     src={slideSrc}
                     alt={`Workflow preview ${index + 1}`}
-                    className="block h-full w-full object-contain object-center opacity-75 blur-[0.5px] max-sm:h-auto max-sm:w-full"
+                    className="block h-full w-full object-contain object-center blur-[0.5px] max-sm:h-auto max-sm:w-full"
                     draggable="false"
                   />
                 </div>
@@ -76,12 +81,6 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
             </div>
           </div>
         ) : null}
-
-        <div
-          className={`pointer-events-none absolute inset-0 opacity-70 [background-image:radial-gradient(rgba(222,228,241,0.8)_2px,transparent_2px)] [background-size:18px_18px] ${
-          hasSlides || hasCustomContent ? 'hidden' : ''
-        }`}
-        />
 
         {hasSlides || hasCustomContent ? null : (
           <svg
@@ -98,7 +97,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                 x2={line.x2}
                 y2={line.y2}
                 pathLength="100"
-                className="stroke-[#66748e] stroke-[0.8] stroke-linecap-round opacity-85"
+                className="stroke-[var(--workflow-line)] stroke-[0.8] stroke-linecap-round opacity-85"
               />
             ))}
           </svg>
@@ -126,7 +125,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
               key={`${slideSrc}-dot-${index}`}
               aria-hidden="true"
               className={`h-2.5 rounded-full transition-all duration-200 ${
-                activeSlide === index ? 'w-6 bg-[#5d87ff]' : 'w-2.5 bg-[rgba(158,172,203,0.55)]'
+                activeSlide === index ? 'w-6 bg-[var(--accent-strong)]' : 'w-2.5 bg-[var(--indicator-muted)]'
               }`}
             />
           ))}

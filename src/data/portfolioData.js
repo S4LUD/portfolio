@@ -22,7 +22,11 @@ export const marqueeStacks = [
   { label: 'Google Sheets', icon: 'googlesheets' },
   { label: 'Slack', icon: 'slack' },
   { label: 'Gmail', icon: 'gmail' },
-  { label: 'Twilio', icon: 'twilio' },
+  {
+    label: 'Twilio',
+    icon: 'twilio',
+    src: 'https://cdn.jsdelivr.net/npm/simple-icons@latest/icons/twilio.svg',
+  },
   { label: 'Postgres', icon: 'postgresql' },
   { label: 'GraphQL', icon: 'graphql' },
 ]

@@ -9,10 +9,10 @@ export const toneClasses = {
 }
 
 export const surfaceClass =
-  'rounded-[22px] bg-[rgba(255,255,255,0.82)] shadow-[0_18px_45px_rgba(150,169,204,0.18),inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-[10px]'
+  'rounded-[22px] bg-[var(--panel-bg)] shadow-[0_18px_45px_var(--panel-shadow),inset_0_1px_0_var(--panel-inset)] backdrop-blur-[10px]'
 
 export const sectionTitleClass =
-  'm-0 text-[clamp(1.1rem,2vw,1.55rem)] leading-[1.4] text-[#32425f]'
+  'm-0 text-[clamp(1.1rem,2vw,1.55rem)] leading-[1.4] text-[var(--text-strong)]'
 
 export const contentWidthClass =
   'mx-auto w-[min(1120px,calc(100%-2rem))] max-sm:w-[min(1120px,calc(100%-1rem))]'
