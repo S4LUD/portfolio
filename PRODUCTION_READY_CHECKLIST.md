@@ -62,4 +62,4 @@
 - [x] Final desktop and mobile QA
 - [x] Final `lint`
 - [x] Final `build`
-- [ ] Push only after the full release pass is complete
+- [x] Push only after the full release pass is complete

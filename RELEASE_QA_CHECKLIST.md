@@ -30,5 +30,5 @@ Use this after the code-side production pass is complete.
 
 - [x] Review `git status` and confirm only intended files are included.
 - [x] Keep `.env` out of the release.
-- [ ] Commit only after the manual and mobile checks pass.
-- [ ] Push only after the full release pass is complete.
+- [x] Commit only after the manual and mobile checks pass.
+- [x] Push only after the full release pass is complete.
