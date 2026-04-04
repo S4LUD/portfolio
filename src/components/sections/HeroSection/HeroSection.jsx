@@ -10,7 +10,7 @@ import { contentWidthClass } from '../../ui/shared/uiClasses'
 function HeroSection({ themePreference, onThemeChange }) {
   return (
     <section
-      className="relative overflow-hidden pt-0 pb-6 backdrop-blur-[6px] max-sm:pb-4"
+      className="relative overflow-hidden pt-0 pb-5 backdrop-blur-[6px] max-sm:pb-4"
       style={{
         backgroundColor: 'var(--hero-bg)',
         backgroundImage: `linear-gradient(var(--hero-overlay), var(--hero-overlay))`,
@@ -19,7 +19,7 @@ function HeroSection({ themePreference, onThemeChange }) {
       <Header themePreference={themePreference} onThemeChange={onThemeChange} />
 
       <section
-        className={`relative grid items-start grid-cols-[minmax(0,0.92fr)_minmax(0,1.45fr)] gap-[1.2rem] rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
+        className={`relative grid items-start grid-cols-[minmax(0,0.92fr)_minmax(0,1.45fr)] gap-5 rounded-[28px] px-5 max-md:grid-cols-1 max-sm:rounded-[22px] max-sm:px-3 ${contentWidthClass}`}
       >
         <div className="pointer-events-none absolute inset-x-0 top-18 bottom-0 z-0 max-md:hidden">
           <NestedPanel className="absolute left-[28%] top-[42%] h-[58%] w-[26%] rounded-[22px] border border-[var(--nested-panel-border)] bg-[var(--nested-panel-bg)] backdrop-blur-[6px]" />
@@ -35,15 +35,15 @@ function HeroSection({ themePreference, onThemeChange }) {
           />
         </div>
 
-        <div className="relative z-[1] flex flex-col justify-center py-[2.1rem] max-sm:py-4">
+        <div className="relative z-[1] flex flex-col justify-center py-8 max-sm:py-4">
           <h1 className="m-0 max-w-[8ch] text-[clamp(2.5rem,5vw,4.3rem)] leading-[0.95] font-bold tracking-[-0.05em] text-[var(--text-strong)] max-sm:max-w-none max-sm:text-[2.8rem]">
             Web, Mobile & Automation
           </h1>
-          <p className="mt-4 mb-5 max-w-[28rem] text-[1.02rem] leading-7 text-[var(--text-muted)]">
+          <p className="mt-4 mb-4 max-w-[28rem] text-[1.02rem] leading-7 text-[var(--text-muted)]">
             Need a website, app, or automation? Let&apos;s build it.
           </p>
 
-          <ul className="mb-6 grid list-none gap-[0.65rem] p-0">
+          <ul className="mb-5 grid list-none gap-2.5 p-0">
             {heroStats.map((stat) => (
               <li
                 key={stat}

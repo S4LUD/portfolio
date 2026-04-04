@@ -20,51 +20,56 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    --app-bg: #ffffff;
-    --hero-bg: #eff3fd;
-    --hero-overlay: rgba(239, 243, 253, 0.99);
-    --section-bg: #ffffff;
-    --section-overlay: rgba(255, 255, 255, 0.99);
-    --text-strong: #32425f;
-    --text-muted: #6f7f9c;
-    --text-soft: #5f7398;
-    --text-faint: #8190ab;
-    --accent-text: #5b79aa;
-    --panel-bg: rgba(255, 255, 255, 0.68);
-    --panel-border: rgba(228, 234, 245, 0.9);
-    --panel-shadow: rgba(150, 169, 204, 0.18);
-    --panel-inset: rgba(255, 255, 255, 0.8);
-    --nested-panel-bg: rgba(255, 255, 255, 0.44);
-    --nested-panel-bg-soft: rgba(255, 255, 255, 0.34);
-    --nested-panel-bg-faint: rgba(255, 255, 255, 0.26);
-    --panel-dot-color: rgba(180, 192, 216, 0.12);
-    --panel-dot-color-soft: rgba(180, 192, 216, 0.08);
-    --toolbar-bg: rgba(255, 255, 255, 0.6);
-    --toolbar-dot: #d4ddef;
-    --nested-panel-border: rgba(228, 234, 245, 0.34);
-    --nested-toolbar-dot: rgba(212, 221, 239, 0.34);
+    --app-bg: #f5f7fb;
+    --hero-bg: #eef2f8;
+    --hero-overlay: rgba(238, 242, 248, 0.985);
+    --section-bg: #f5f7fb;
+    --section-overlay: rgba(245, 247, 251, 0.985);
+    --text-strong: #283754;
+    --text-muted: #526482;
+    --text-soft: #465c80;
+    --text-faint: #687b9b;
+    --accent-text: #4668a3;
+    --panel-bg: rgba(255, 255, 255, 0.9);
+    --panel-border: rgba(205, 215, 231, 0.96);
+    --panel-shadow: rgba(126, 143, 175, 0.12);
+    --panel-inset: rgba(255, 255, 255, 0.98);
+    --nested-panel-bg: rgba(255, 255, 255, 0.62);
+    --nested-panel-bg-soft: rgba(255, 255, 255, 0.46);
+    --nested-panel-bg-faint: rgba(255, 255, 255, 0.34);
+    --panel-dot-color: rgba(165, 178, 205, 0.08);
+    --panel-dot-color-soft: rgba(165, 178, 205, 0.05);
+    --toolbar-bg: rgba(255, 255, 255, 0.92);
+    --toolbar-dot: #c3cedf;
+    --nested-panel-border: rgba(205, 215, 231, 0.46);
+    --nested-toolbar-dot: rgba(195, 206, 223, 0.32);
     --workflow-panel-bg: #ffffff;
     --workflow-stage-bg: #ffffff;
     --workflow-line: #66748e;
-    --indicator-muted: rgba(158, 172, 203, 0.55);
-    --chip-bg: rgba(239, 244, 255, 0.96);
-    --chip-text: #5d739a;
+    --indicator-muted: rgba(136, 152, 183, 0.44);
+    --chip-bg: rgba(229, 235, 247, 0.96);
+    --chip-text: #496386;
     --chip-gradient-start: #ffffff;
-    --chip-gradient-end: #eef4ff;
-    --button-subtle-bg: #eef4ff;
-    --button-subtle-text: #6180bd;
+    --chip-gradient-end: #eef2f8;
+    --button-subtle-bg: #e7edf8;
+    --button-subtle-text: #4d6d9e;
     --button-primary-from: #6b98ff;
     --button-primary-to: #4d72e8;
     --button-primary-shadow: rgba(92, 130, 229, 0.28);
-    --modal-bg: #ffffff;
-    --modal-subtle-bg: #fbfdff;
+    --modal-bg: #fdfefe;
+    --modal-subtle-bg: #f1f4f8;
     --input-bg: #ffffff;
-    --input-focus-ring: rgba(107, 152, 255, 0.15);
+    --project-panel-bg: #f9fbfe;
+    --project-panel-border: rgba(205, 215, 231, 0.96);
+    --project-panel-shadow: rgba(138, 154, 182, 0.1);
+    --project-panel-inset: rgba(255, 255, 255, 0.98);
+    --project-glow-opacity: 0.3;
+    --input-focus-ring: rgba(93, 135, 255, 0.16);
     --theme-toggle-active-bg: #ffffff;
-    --theme-toggle-active-text: #32425f;
-    --theme-toggle-hover-bg: rgba(238, 244, 255, 0.8);
+    --theme-toggle-active-text: #2f3e59;
+    --theme-toggle-hover-bg: rgba(231, 237, 248, 0.96);
     --accent-strong: #5d87ff;
-    --soft-shadow: rgba(185, 198, 226, 0.16);
+    --soft-shadow: rgba(173, 185, 210, 0.14);
   }
 
   :root[data-theme='dark'] {
@@ -76,10 +81,10 @@
     --section-bg: #0d1422;
     --section-overlay: rgba(13, 20, 34, 0.985);
     --text-strong: #e6edf9;
-    --text-muted: #aebcd6;
-    --text-soft: #92a7ca;
-    --text-faint: #7f93b4;
-    --accent-text: #8eb2ff;
+    --text-muted: #b7c4db;
+    --text-soft: #9dafce;
+    --text-faint: #899cc0;
+    --accent-text: #9abaff;
     --panel-bg: rgba(20, 30, 49, 0.6);
     --panel-border: rgba(84, 104, 142, 0.52);
     --panel-shadow: rgba(2, 8, 23, 0.45);
@@ -98,17 +103,22 @@
     --workflow-line: #8ca0c2;
     --indicator-muted: rgba(103, 127, 173, 0.45);
     --chip-bg: rgba(29, 43, 69, 0.92);
-    --chip-text: #b2c3df;
+    --chip-text: #bed0ea;
     --chip-gradient-start: rgba(34, 49, 77, 0.95);
     --chip-gradient-end: rgba(23, 34, 54, 0.95);
     --button-subtle-bg: rgba(33, 48, 76, 0.96);
-    --button-subtle-text: #9db8f6;
+    --button-subtle-text: #a9c1fb;
     --button-primary-from: #7aa6ff;
     --button-primary-to: #5378ec;
     --button-primary-shadow: rgba(31, 55, 122, 0.44);
     --modal-bg: #111b2d;
     --modal-subtle-bg: rgba(18, 28, 45, 0.96);
     --input-bg: rgba(14, 23, 38, 0.9);
+    --project-panel-bg: rgba(18, 28, 45, 0.96);
+    --project-panel-border: rgba(84, 104, 142, 0.52);
+    --project-panel-shadow: rgba(5, 10, 20, 0.28);
+    --project-panel-inset: rgba(255, 255, 255, 0.04);
+    --project-glow-opacity: 0.7;
     --input-focus-ring: rgba(122, 166, 255, 0.18);
     --theme-toggle-active-bg: rgba(33, 48, 76, 0.96);
     --theme-toggle-active-text: #e6edf9;
@@ -147,17 +157,4 @@
 }
 
 @layer components {
-  @keyframes stack-marquee-scroll {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  .stack-marquee {
-    animation: stack-marquee-scroll 26s linear infinite;
-  }
 }

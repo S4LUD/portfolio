@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from 'react'
 import { Minus, Square, X } from 'lucide-react'
-import { toneClasses } from '../shared/uiClasses'
+import { surfaceClass, toneClasses } from '../shared/uiClasses'
 
 function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, children }) {
   const hasCustomContent = Boolean(children)
@@ -23,7 +23,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
 
   return (
     <article
-      className={`relative rounded-[22px] border border-[var(--panel-border)] bg-[var(--workflow-panel-bg)] p-4 shadow-[0_18px_45px_var(--panel-shadow),inset_0_1px_0_var(--panel-inset)] ${className}`.trim()}
+      className={`relative border border-[var(--panel-border)] bg-[var(--workflow-panel-bg)] p-4 ${surfaceClass} ${className}`.trim()}
     >
       <div className="flex items-center justify-between px-2 pb-3">
         <div className="flex items-center gap-2" aria-hidden="true">
@@ -40,7 +40,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
       <div className="mx-[-1rem] border-b border-[var(--panel-border)]" />
 
       <div
-        className={`relative mt-4 overflow-hidden rounded-[18px] ${
+        className={`relative mt-4 overflow-hidden ${
           hasCustomContent
             ? ''
             : hasSlides
@@ -67,7 +67,11 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                   <img
                     src={slideSrc}
                     alt={`Workflow preview ${index + 1}`}
-                    className="block h-full w-full object-contain object-center blur-[0.5px] max-sm:h-auto max-sm:w-full"
+                    loading={index === 0 ? 'eager' : 'lazy'}
+                    fetchPriority={index === 0 ? 'high' : 'auto'}
+                    decoding="async"
+                    sizes="(max-width: 767px) 100vw, 58vw"
+                    className="block h-full w-full object-contain object-center max-sm:h-auto max-sm:w-full"
                     draggable="false"
                   />
                 </div>

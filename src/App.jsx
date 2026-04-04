@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import FloatingContactBar from './components/layout/FloatingContactBar/FloatingContactBar'
 import HeroSection from './components/sections/HeroSection/HeroSection'
+import ProjectsSection from './components/sections/ProjectsSection/ProjectsSection'
 import ContactModal from './components/ui/ContactModal/ContactModal'
-import StackMarquee from './components/ui/StackMarquee/StackMarquee'
 
 const THEME_STORAGE_KEY = 'portfolio-theme-preference'
 
@@ -16,6 +16,8 @@ function getSystemTheme() {
 
 function App() {
   const [isContactOpen, setIsContactOpen] = useState(false)
+  const [floatingBarHeight, setFloatingBarHeight] = useState(0)
+  const [contactNotice, setContactNotice] = useState({ type: '', message: '' })
   const [themePreference, setThemePreference] = useState(() => {
     if (typeof window === 'undefined') {
       return 'system'
@@ -32,8 +34,14 @@ function App() {
   )
   const openContact = useCallback(() => setIsContactOpen(true), [])
   const closeContact = useCallback(() => setIsContactOpen(false), [])
+  const handleContactSuccess = useCallback((message) => {
+    setContactNotice({ type: 'success', message })
+  }, [])
   const updateThemePreference = useCallback((nextTheme) => {
     setThemePreference(nextTheme)
+  }, [])
+  const handleFloatingBarHeightChange = useCallback((nextHeight) => {
+    setFloatingBarHeight(nextHeight)
   }, [])
 
   useEffect(() => {
@@ -62,14 +70,42 @@ function App() {
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [themePreference])
 
+  useEffect(() => {
+    if (!contactNotice.message) {
+      return undefined
+    }
+
+    const timeoutId = window.setTimeout(() => {
+      setContactNotice({ type: '', message: '' })
+    }, 3200)
+
+    return () => window.clearTimeout(timeoutId)
+  }, [contactNotice.message])
+
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[var(--app-bg)] text-[var(--text-strong)]">
-      <section className="relative z-10 pb-[6.25rem] max-sm:pb-[calc(env(safe-area-inset-bottom)+7.25rem)]">
+      <section
+        className="relative z-10"
+        style={{
+          paddingBottom: `calc(env(safe-area-inset-bottom) + ${floatingBarHeight}px + 0.75rem)`,
+        }}
+      >
         <HeroSection themePreference={themePreference} onThemeChange={updateThemePreference} />
-        <StackMarquee />
-        <FloatingContactBar onOpenContact={openContact} />
+        <ProjectsSection />
+        <FloatingContactBar
+          onOpenContact={openContact}
+          onHeightChange={handleFloatingBarHeightChange}
+        />
       </section>
-      <ContactModal open={isContactOpen} onClose={closeContact} />
+      {contactNotice.message ? (
+        <div
+          aria-live="polite"
+          className="fixed right-4 bottom-[calc(env(safe-area-inset-bottom)+6.25rem)] z-30 max-w-[min(28rem,calc(100vw-2rem))] rounded-[18px] border border-[rgba(102,177,127,0.24)] bg-[var(--modal-bg)] px-4 py-3 text-[0.92rem] font-semibold text-[#2f7d51] shadow-[0_18px_36px_var(--panel-shadow),inset_0_1px_0_rgba(255,255,255,0.72)] max-sm:right-2 max-sm:left-2 max-sm:bottom-[calc(env(safe-area-inset-bottom)+5.5rem)]"
+        >
+          {contactNotice.message}
+        </div>
+      ) : null}
+      <ContactModal open={isContactOpen} onClose={closeContact} onSubmitSuccess={handleContactSuccess} />
     </main>
   )
 }

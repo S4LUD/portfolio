@@ -11,6 +11,21 @@ export const toneClasses = {
 export const surfaceClass =
   'rounded-[22px] bg-[var(--panel-bg)] shadow-[0_18px_45px_var(--panel-shadow),inset_0_1px_0_var(--panel-inset)] backdrop-blur-[10px]'
 
+export const subtlePanelClass =
+  'rounded-[22px] border border-[var(--project-panel-border)] bg-[var(--project-panel-bg)] shadow-[inset_0_1px_0_var(--project-panel-inset)]'
+
+export const toolbarPanelClass =
+  'border border-[var(--panel-border)] bg-[var(--toolbar-bg)] shadow-[0_18px_36px_var(--soft-shadow)]'
+
+export const subtleBadgeClass =
+  'inline-flex min-h-8 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-3 text-[0.8rem] font-semibold text-[var(--button-subtle-text)]'
+
+export const strongBadgeClass =
+  'inline-flex min-h-8 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-3 text-[0.8rem] font-bold text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)]'
+
+export const chipClass =
+  'inline-flex min-h-8 items-center justify-center rounded-full bg-[var(--chip-bg)] px-3 text-[0.8rem] font-bold text-[var(--chip-text)]'
+
 export const sectionTitleClass =
   'm-0 text-[clamp(1.1rem,2vw,1.55rem)] leading-[1.4] text-[var(--text-strong)]'
 

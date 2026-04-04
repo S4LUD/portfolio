@@ -41,7 +41,7 @@ function TurnstileWidget({ siteKey, onTokenChange, onExpired, onError }) {
 
       widgetIdRef.current = window.turnstile.render(container, {
         sitekey: siteKey,
-        theme: 'light',
+        theme: 'auto',
         callback: (token) => onTokenChange(token),
         'expired-callback': () => {
           onTokenChange('')
