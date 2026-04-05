@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import FloatingContactBar from './components/layout/FloatingContactBar/FloatingContactBar'
 import HeroSection from './components/sections/HeroSection/HeroSection'
+import ContactSection from './components/sections/ContactSection/ContactSection'
 import ProjectsSection from './components/sections/ProjectsSection/ProjectsSection'
-import ContactModal from './components/ui/ContactModal/ContactModal'
 
 const THEME_STORAGE_KEY = 'portfolio-theme-preference'
 
@@ -15,9 +15,9 @@ function getSystemTheme() {
 }
 
 function App() {
-  const [isContactOpen, setIsContactOpen] = useState(false)
   const [floatingBarHeight, setFloatingBarHeight] = useState(0)
   const [contactNotice, setContactNotice] = useState({ type: '', message: '' })
+  const contactSectionRef = useRef(null)
   const [themePreference, setThemePreference] = useState(() => {
     if (typeof window === 'undefined') {
       return 'system'
@@ -32,8 +32,12 @@ function App() {
     () => (themePreference === 'system' ? getSystemTheme() : themePreference),
     [themePreference],
   )
-  const openContact = useCallback(() => setIsContactOpen(true), [])
-  const closeContact = useCallback(() => setIsContactOpen(false), [])
+  const openContact = useCallback(() => {
+    contactSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    })
+  }, [])
   const handleContactSuccess = useCallback((message) => {
     setContactNotice({ type: 'success', message })
   }, [])
@@ -82,16 +86,29 @@ function App() {
     return () => window.clearTimeout(timeoutId)
   }, [contactNotice.message])
 
+  useEffect(() => {
+    const handleContextMenu = (event) => {
+      event.preventDefault()
+    }
+
+    document.addEventListener('contextmenu', handleContextMenu)
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu)
+    }
+  }, [])
+
   return (
     <main className="relative min-h-dvh overflow-hidden bg-[var(--app-bg)] text-[var(--text-strong)]">
       <section
-        className="relative z-10"
+        className="relative z-10 flex flex-col gap-8 sm:gap-10 md:gap-12"
         style={{
-          paddingBottom: `calc(env(safe-area-inset-bottom) + ${floatingBarHeight}px + 0.75rem)`,
+          paddingBottom: `calc(env(safe-area-inset-bottom) + ${floatingBarHeight}px + 4rem)`,
         }}
       >
         <HeroSection themePreference={themePreference} onThemeChange={updateThemePreference} />
         <ProjectsSection />
+        <ContactSection sectionRef={contactSectionRef} onSubmitSuccess={handleContactSuccess} />
         <FloatingContactBar
           onOpenContact={openContact}
           onHeightChange={handleFloatingBarHeightChange}
@@ -105,7 +122,6 @@ function App() {
           {contactNotice.message}
         </div>
       ) : null}
-      <ContactModal open={isContactOpen} onClose={closeContact} onSubmitSuccess={handleContactSuccess} />
     </main>
   )
 }

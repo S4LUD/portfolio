@@ -251,7 +251,7 @@ function AutomationWorkflowPreview() {
   return (
     <div className="rounded-[14px] bg-linear-to-br from-[var(--input-bg)] to-[var(--project-panel-bg)] p-3 shadow-[inset_0_1px_0_var(--project-panel-inset)]">
       <div className="overflow-x-auto pb-1">
-        <div className="min-w-[34rem]">
+        <div className="min-w-[30rem] sm:min-w-[34rem]">
           <div className="mx-auto flex max-w-[10.5rem] flex-col items-center">
             {automationWorkflowMain.map((step, index) => (
               <div
@@ -322,7 +322,7 @@ function WorkflowPreviewModal({ open, onClose }) {
         aria-label="Close workflow preview"
       />
 
-      <div className="relative z-[1] inline-flex max-h-[88vh] w-[min(100%,68rem)] flex-col p-4 max-sm:max-h-[92vh] max-sm:p-3">
+      <div className="relative z-[1] inline-flex max-h-[92vh] w-[min(100%,68rem)] flex-col p-3 sm:p-4">
         <button
           type="button"
           onClick={onClose}
@@ -466,7 +466,7 @@ function FeaturedProjectCard({
           className="pointer-events-none absolute inset-x-0 top-0 h-28 blur-2xl"
         />
 
-        <div className="relative grid grid-cols-[minmax(0,1.18fr)_minmax(300px,0.82fr)] gap-5 max-lg:grid-cols-1">
+        <div className="relative grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.18fr)_minmax(300px,0.82fr)]">
           <div>
             <div className="flex flex-wrap items-center gap-2">
               <span className={strongBadgeClass}>{featuredProject.type}</span>
@@ -475,7 +475,7 @@ function FeaturedProjectCard({
               </span>
             </div>
 
-            <div className="mt-4 flex items-start gap-4 max-sm:flex-col max-sm:gap-3">
+            <div className="mt-4 flex flex-col items-start gap-3 sm:flex-row sm:gap-4">
                 <div
                   className={`inline-flex h-13 w-13 shrink-0 items-center justify-center rounded-[18px] bg-[var(--button-subtle-bg)] shadow-[0_12px_24px_var(--soft-shadow)] ${featuredMeta?.iconClass ?? ""}`}
                   style={{ backgroundImage: featuredMeta?.badgeVar }}
@@ -489,7 +489,7 @@ function FeaturedProjectCard({
                 <p className="m-0 text-[0.8rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                   {featuredMeta?.profileLabel}
                 </p>
-                <h3 className="mt-2 mb-3 text-[1.65rem] leading-[1.08] font-bold text-[var(--text-strong)] max-sm:text-[1.4rem]">
+                <h3 className="mt-2 mb-3 text-[1.4rem] leading-[1.08] font-bold text-[var(--text-strong)] sm:text-[1.55rem] md:text-[1.65rem]">
                   {featuredProject.title}
                 </h3>
                 <p className="m-0 max-w-[42rem] text-[1rem] leading-8 text-[var(--text-muted)]">
@@ -529,9 +529,9 @@ function FeaturedProjectCard({
           </div>
 
           <div className="grid content-start gap-3.5 self-start">
-            <div className={`${subtlePanelClass} rounded-[16px] p-5`}>
+            <div className={`${subtlePanelClass} rounded-[16px] p-4 sm:p-5`}>
               <div className="grid gap-4">
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div className="rounded-[10px] bg-[var(--input-bg)] px-4 py-3 shadow-[inset_0_1px_0_var(--project-panel-inset)]">
                     <p className="m-0 text-[0.72rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                       Type
@@ -555,7 +555,7 @@ function FeaturedProjectCard({
                   <p className="m-0 text-[0.78rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                     Focus
                   </p>
-                  <div className="mt-3 grid grid-cols-2 gap-2.5 max-sm:grid-cols-1">
+                  <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                     {featuredFocus.map((item) => (
                       <div
                         key={item}
@@ -584,11 +584,11 @@ function FeaturedProjectCard({
             </div>
 
             {featuredProject.sidePanel === "snapshot" ? (
-              <div className={`${subtlePanelClass} rounded-[20px] p-5`}>
+              <div className={`${subtlePanelClass} rounded-[20px] p-4 sm:p-5`}>
                 <p className="mb-2 text-[0.85rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                   Screens
                 </p>
-                  <div className="rounded-[16px] p-4">
+                  <div className="rounded-[16px] p-0 sm:p-2">
                   {featuredSnapshots.length ? (
                     <div className="mb-4">
                       <button
@@ -629,7 +629,7 @@ function FeaturedProjectCard({
                 </div>
               </div>
             ) : featuredProject.sidePanel === "client-note" ? (
-              <div className={`${subtlePanelClass} rounded-[20px] p-5`}>
+              <div className={`${subtlePanelClass} rounded-[20px] p-4 sm:p-5`}>
                 <p className="mb-2 text-[0.85rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                   Client Scope
                 </p>
@@ -638,7 +638,7 @@ function FeaturedProjectCard({
                 </p>
               </div>
             ) : featuredProject.sidePanel === "workflow" ? (
-              <div className={`${subtlePanelClass} rounded-[20px] p-5`}>
+              <div className={`${subtlePanelClass} rounded-[20px] p-4 sm:p-5`}>
                 <p className="mb-2 text-[0.85rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                   Workflow Preview
                 </p>
@@ -843,7 +843,7 @@ function ProjectsSection() {
 
   return (
     <section
-      className={`relative mt-8 mb-10 px-5 max-sm:mt-7 max-sm:mb-8 max-sm:px-3 ${contentWidthClass}`}
+      className={`relative px-3 sm:px-4 md:px-5 ${contentWidthClass}`}
     >
       <div className="mb-4">
         <h2 className={`${sectionTitleClass} max-w-[40rem]`}>
@@ -893,7 +893,7 @@ function ProjectsSection() {
         />
       ) : null}
 
-      <div className="columns-3 gap-4 max-lg:columns-2 max-sm:columns-1">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
         {gridProjects.map((project) => {
           const meta = getProjectMeta(project.type);
           const Icon = meta.icon;
@@ -901,7 +901,7 @@ function ProjectsSection() {
           return (
             <article
               key={project.id}
-              className={`${projectSurfaceClass} mb-4 inline-block w-full break-inside-avoid p-[1.1rem] align-top max-sm:p-4`}
+              className={`${projectSurfaceClass} w-full p-4 md:p-[1.1rem]`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span

@@ -29,6 +29,14 @@ function TurnstileWidget({ siteKey, onTokenChange, onExpired, onError }) {
     let cancelled = false
     let intervalId = null
 
+    const resetWidget = () => {
+      if (cancelled || !window.turnstile || widgetIdRef.current === null) {
+        return
+      }
+
+      window.turnstile.reset(widgetIdRef.current)
+    }
+
     const renderWidget = () => {
       if (cancelled || !window.turnstile) {
         return
@@ -46,10 +54,12 @@ function TurnstileWidget({ siteKey, onTokenChange, onExpired, onError }) {
         'expired-callback': () => {
           onTokenChange('')
           onExpired?.()
+          window.setTimeout(resetWidget, 0)
         },
         'error-callback': () => {
           onTokenChange('')
           onError?.()
+          window.setTimeout(resetWidget, 0)
         },
       })
     }

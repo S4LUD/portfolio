@@ -31,7 +31,7 @@
     --text-faint: #687b9b;
     --accent-text: #4668a3;
     --panel-bg: rgba(255, 255, 255, 0.9);
-    --panel-border: rgba(205, 215, 231, 0.96);
+    --panel-border: rgba(205, 215, 231, 0.52);
     --panel-shadow: rgba(126, 143, 175, 0.12);
     --panel-inset: rgba(255, 255, 255, 0.98);
     --nested-panel-bg: rgba(255, 255, 255, 0.62);
@@ -66,7 +66,7 @@
     --modal-subtle-bg: #f1f4f8;
     --input-bg: #ffffff;
     --project-panel-bg: #f9fbfe;
-    --project-panel-border: rgba(205, 215, 231, 0.34);
+    --project-panel-border: rgba(205, 215, 231, 0.22);
     --project-panel-shadow: rgba(138, 154, 182, 0.1);
     --project-panel-inset: rgba(255, 255, 255, 0.98);
     --project-glow-opacity: 0.3;
@@ -98,7 +98,7 @@
     --text-faint: #899cc0;
     --accent-text: #9abaff;
     --panel-bg: rgba(20, 30, 49, 0.6);
-    --panel-border: rgba(84, 104, 142, 0.52);
+    --panel-border: rgba(84, 104, 142, 0.34);
     --panel-shadow: rgba(2, 8, 23, 0.45);
     --panel-inset: rgba(255, 255, 255, 0.04);
     --nested-panel-bg: rgba(20, 30, 49, 0.38);
@@ -133,7 +133,7 @@
     --modal-subtle-bg: rgba(18, 28, 45, 0.96);
     --input-bg: rgba(14, 23, 38, 0.9);
     --project-panel-bg: rgba(18, 28, 45, 0.96);
-    --project-panel-border: rgba(84, 104, 142, 0.22);
+    --project-panel-border: rgba(84, 104, 142, 0.16);
     --project-panel-shadow: rgba(5, 10, 20, 0.28);
     --project-panel-inset: rgba(255, 255, 255, 0.04);
     --project-glow-opacity: 0.7;
@@ -167,11 +167,21 @@
     min-width: 320px;
     background: var(--app-bg);
     color: var(--text-strong);
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
   }
 
   a,
   button {
     font: inherit;
+  }
+
+  input,
+  textarea,
+  select {
+    user-select: text;
+    -webkit-user-select: text;
   }
 
   img {

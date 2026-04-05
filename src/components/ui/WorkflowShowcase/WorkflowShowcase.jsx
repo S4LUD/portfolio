@@ -54,16 +54,16 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
 
         {hasSlides ? (
           <div
-            className="relative z-[1] h-[20rem] max-sm:h-auto"
+            className="relative z-[1] h-auto md:h-[20rem]"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             <div
-              className="flex h-full transition-transform duration-700 ease-out max-sm:h-auto"
+              className="flex h-auto transition-transform duration-700 ease-out md:h-full"
               style={{ transform: `translateX(-${activeSlide * 100}%)` }}
             >
               {slides.map((slideSrc, index) => (
-                <div key={`${slideSrc}-${index}`} className="flex h-full w-full shrink-0 items-center max-sm:h-auto">
+                <div key={`${slideSrc}-${index}`} className="flex h-auto w-full shrink-0 items-center md:h-full">
                   <img
                     src={slideSrc}
                     alt={`Workflow preview ${index + 1}`}
@@ -71,7 +71,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
                     fetchPriority={index === 0 ? 'high' : 'auto'}
                     decoding="async"
                     sizes="(max-width: 767px) 100vw, 58vw"
-                    className="block h-full w-full object-contain object-center max-sm:h-auto max-sm:w-full"
+                    className="block h-auto w-full object-contain object-center md:h-full"
                     draggable="false"
                   />
                 </div>
