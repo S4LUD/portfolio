@@ -3,6 +3,7 @@ import FloatingContactBar from './components/layout/FloatingContactBar/FloatingC
 import HeroSection from './components/sections/HeroSection/HeroSection'
 import ContactSection from './components/sections/ContactSection/ContactSection'
 import ProjectsSection from './components/sections/ProjectsSection/ProjectsSection'
+import { trackPortfolioView } from './lib/supabase/pageViews'
 
 const THEME_STORAGE_KEY = 'portfolio-theme-preference'
 
@@ -96,6 +97,10 @@ function App() {
     return () => {
       document.removeEventListener('contextmenu', handleContextMenu)
     }
+  }, [])
+
+  useEffect(() => {
+    trackPortfolioView().catch(() => {})
   }, [])
 
   return (
