@@ -4,6 +4,7 @@ import quantumNexusDemo3 from '../assets/quantum-nexus/demo_image_3.jpg'
 import quantumNexusDemo4 from '../assets/quantum-nexus/demo_image_4.jpg'
 import quantumNexusDemo5 from '../assets/quantum-nexus/demo_image_5.jpg'
 import quantumNexusDemo6 from '../assets/quantum-nexus/demo_image_6.jpg'
+import macroHokDemo1 from '../assets/macrohok/demo_image_1.png'
 
 export const heroStats = [
   'Agile implementation from rough idea to working product.',
@@ -118,5 +119,24 @@ export const projects = [
     outcome:
       'Delivered a cleaner intake pipeline with more reliable data handling, conditional routing, internal alerts, and automated email follow-up.',
     stack: ['Zapier', 'Google Forms', 'Airtable', 'Slack', 'Gmail', 'JavaScript'],
+  },
+  {
+    id: 'macrohok',
+    featured: false,
+    type: 'Automation',
+    engagement: 'Personal',
+    title: 'MacroHok',
+    externalUrl: 'https://sourceforge.net/projects/macrohok/',
+    sidePanel: 'snapshot',
+    summary:
+      'A Python desktop automation utility for configurable mouse, keyboard, and scroll workflows, with hotkeys, presets, live logging, and packaged Windows releases.',
+    challenge:
+      'I wanted a more complete desktop automation tool than one-off scripts could offer, with reusable workflows, controlled execution, and a UI that made macro setup easier to manage.',
+    solution:
+      'Built a Python app with a Tkinter GUI, global hotkeys, preset storage, action editing, execution controls, logging, and release packaging for Windows distribution.',
+    outcome:
+      'Delivered a reusable desktop automation utility with configurable macro behavior, saved presets, structured execution flow, and production-style packaging and test coverage.',
+    snapshotImages: [macroHokDemo1],
+    stack: ['Python', 'Tkinter', 'Pynput', 'PyDirectInput', 'PyGetWindow', 'PyInstaller'],
   },
 ]

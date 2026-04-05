@@ -5,6 +5,7 @@ import {
   Cable,
   ChevronLeft,
   ChevronRight,
+  ExternalLink,
   Globe,
   Smartphone,
   X,
@@ -349,6 +350,201 @@ function WorkflowPreviewModal({ open, onClose }) {
   );
 }
 
+function SnapshotGalleryModal({ onClose, project }) {
+  const [activeSnapshot, setActiveSnapshot] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const [galleryAmbient, setGalleryAmbient] = useState(null);
+  const snapshots = useMemo(() => project.snapshotImages ?? [], [project.snapshotImages]);
+
+  useEffect(() => {
+    setActiveSnapshot(0);
+  }, [project.id]);
+
+  useEffect(() => {
+    if (snapshots.length <= 1 || isPaused) {
+      return undefined;
+    }
+
+    const intervalId = window.setInterval(() => {
+      setActiveSnapshot((current) => (current + 1) % snapshots.length);
+    }, 4200);
+
+    return () => window.clearInterval(intervalId);
+  }, [isPaused, snapshots.length]);
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        onClose();
+        return;
+      }
+
+      if (snapshots.length <= 1) {
+        return;
+      }
+
+      if (event.key === "ArrowRight") {
+        setActiveSnapshot((current) => (current + 1) % snapshots.length);
+      } else if (event.key === "ArrowLeft") {
+        setActiveSnapshot(
+          (current) => (current - 1 + snapshots.length) % snapshots.length,
+        );
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose, snapshots.length]);
+
+  useEffect(() => {
+    if (!snapshots.length) {
+      return undefined;
+    }
+
+    let cancelled = false;
+    const image = new window.Image();
+
+    image.onload = () => {
+      if (!cancelled) {
+        setGalleryAmbient(sampleAmbientColors(image));
+      }
+    };
+
+    image.onerror = () => {
+      if (!cancelled) {
+        setGalleryAmbient(null);
+      }
+    };
+
+    image.src = snapshots[activeSnapshot];
+
+    return () => {
+      cancelled = true;
+    };
+  }, [activeSnapshot, snapshots]);
+
+  const showPreviousSnapshot = () => {
+    setActiveSnapshot((current) => (current - 1 + snapshots.length) % snapshots.length);
+  };
+
+  const showNextSnapshot = () => {
+    setActiveSnapshot((current) => (current + 1) % snapshots.length);
+  };
+
+  if (!snapshots.length) {
+    return null;
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[var(--gallery-backdrop)] p-4 backdrop-blur-[10px] max-sm:p-2">
+      <button
+        type="button"
+        onClick={onClose}
+        className="absolute inset-0"
+        aria-label={`Close ${project.title} gallery`}
+      />
+
+      <div className="relative z-[1] inline-flex max-w-full flex-col p-4 max-sm:p-3">
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--gallery-control-bg)] text-[var(--gallery-control-text)] shadow-[0_10px_24px_var(--soft-shadow)] backdrop-blur-[6px]"
+          aria-label={`Close ${project.title} gallery`}
+        >
+          <X className="h-4 w-4" />
+        </button>
+
+        <div className="mb-3 pr-12">
+          <p className="m-0 text-[0.8rem] font-extrabold uppercase tracking-[0.08em] text-[var(--gallery-title-text)]">
+            {project.title}
+          </p>
+          <p className="mt-1 mb-0 text-[0.95rem] text-[var(--gallery-meta-text)]">
+            Screenshot {activeSnapshot + 1} of {snapshots.length}
+          </p>
+        </div>
+
+        <div
+          className="flex justify-center"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div className="relative max-w-full px-14 max-sm:w-full max-sm:px-10">
+            {snapshots.length > 1 ? (
+              <button
+                type="button"
+                onClick={showPreviousSnapshot}
+                className="absolute top-1/2 left-0 z-[2] inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--gallery-control-bg)] text-[var(--gallery-control-text)] shadow-[0_10px_24px_var(--soft-shadow)] backdrop-blur-[6px]"
+                aria-label={`Show previous ${project.title} screenshot`}
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+            ) : null}
+
+            <div className="pointer-events-none absolute inset-x-6 top-1/2 z-0 h-[70vh] -translate-y-1/2 blur-[110px] max-sm:inset-x-3 max-sm:h-[60vh]">
+              <div
+                className="absolute top-[10%] left-0 h-[54%] w-[54%] rounded-full"
+                style={{
+                  backgroundImage: `radial-gradient(circle, ${rgbaFromColor(galleryAmbient?.left ?? { r: 190, g: 104, b: 255 }, 0.7)} 0%, ${rgbaFromColor(galleryAmbient?.left ?? { r: 190, g: 104, b: 255 }, 0.28)} 36%, transparent 74%)`,
+                }}
+              />
+              <div
+                className="absolute top-[14%] right-0 h-[54%] w-[54%] rounded-full"
+                style={{
+                  backgroundImage: `radial-gradient(circle, ${rgbaFromColor(galleryAmbient?.right ?? { r: 40, g: 198, b: 255 }, 0.62)} 0%, ${rgbaFromColor(galleryAmbient?.right ?? { r: 40, g: 198, b: 255 }, 0.24)} 36%, transparent 74%)`,
+                }}
+              />
+              <div
+                className="absolute inset-x-[18%] bottom-[6%] h-[34%] rounded-full"
+                style={{
+                  backgroundImage: `radial-gradient(circle, ${rgbaFromColor(galleryAmbient?.center ?? { r: 115, g: 150, b: 230 }, 0.34)} 0%, ${rgbaFromColor(galleryAmbient?.center ?? { r: 115, g: 150, b: 230 }, 0.12)} 44%, transparent 78%)`,
+                }}
+              />
+            </div>
+
+            <div className="mx-auto flex max-h-[74vh] max-w-[min(100vw-8rem,70rem)] items-center justify-center overflow-hidden rounded-[22px] p-2 max-sm:max-h-[70vh] max-sm:max-w-[calc(100vw-5rem)]">
+              <img
+                src={snapshots[activeSnapshot]}
+                alt={`${project.title} screenshot ${activeSnapshot + 1}`}
+                className="block max-h-[calc(74vh-1rem)] max-w-full object-contain max-sm:max-h-[calc(70vh-1rem)]"
+                draggable="false"
+              />
+            </div>
+
+            {snapshots.length > 1 ? (
+              <button
+                type="button"
+                onClick={showNextSnapshot}
+                className="absolute top-1/2 right-0 z-[2] inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--gallery-control-bg)] text-[var(--gallery-control-text)] shadow-[0_10px_24px_var(--soft-shadow)] backdrop-blur-[6px]"
+                aria-label={`Show next ${project.title} screenshot`}
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        {snapshots.length > 1 ? (
+          <div className="mt-4 flex items-center justify-center gap-2">
+            {snapshots.map((imageSrc, index) => (
+              <button
+                key={`${imageSrc}-gallery-dot-${index}`}
+                type="button"
+                onClick={() => setActiveSnapshot(index)}
+                className={`h-2.5 rounded-full transition-all duration-200 ${
+                  activeSnapshot === index
+                    ? "w-6 bg-[var(--accent-strong)]"
+                    : "w-2.5 bg-[var(--indicator-muted)]"
+                }`}
+                aria-label={`Show ${project.title} screenshot ${index + 1}`}
+              />
+            ))}
+          </div>
+        ) : null}
+      </div>
+    </div>
+  );
+}
+
 function FeaturedProjectCard({
   featuredProject,
   featuredMeta,
@@ -485,13 +681,26 @@ function FeaturedProjectCard({
                 ) : null}
               </div>
 
-              <div>
+              <div className="min-w-0 flex-1">
                 <p className="m-0 text-[0.8rem] font-extrabold uppercase tracking-[0.08em] text-[var(--accent-text)]">
                   {featuredMeta?.profileLabel}
                 </p>
-                <h3 className="mt-2 mb-3 text-[1.4rem] leading-[1.08] font-bold text-[var(--text-strong)] sm:text-[1.55rem] md:text-[1.65rem]">
-                  {featuredProject.title}
-                </h3>
+                <div className="mt-2 mb-3 flex items-center gap-3">
+                  <h3 className="m-0 text-[1.4rem] leading-[1.08] font-bold text-[var(--text-strong)] sm:text-[1.55rem] md:text-[1.65rem]">
+                    {featuredProject.title}
+                  </h3>
+                  {featuredProject.externalUrl ? (
+                    <a
+                      href={featuredProject.externalUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)] transition-colors hover:bg-[var(--theme-toggle-hover-bg)]"
+                      aria-label={`Open ${featuredProject.title} external link`}
+                    >
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
+                  ) : null}
+                </div>
                 <p className="m-0 max-w-[42rem] text-[1rem] leading-8 text-[var(--text-muted)]">
                   {featuredProject.summary}
                 </p>
@@ -692,7 +901,7 @@ function FeaturedProjectCard({
               onMouseEnter={() => setIsSnapshotPaused(true)}
               onMouseLeave={() => setIsSnapshotPaused(false)}
             >
-              <div className="relative w-[min(100%,34rem)] px-14 max-sm:w-full max-sm:px-10">
+              <div className="relative max-w-full px-14 max-sm:w-full max-sm:px-10">
                 {featuredSnapshots.length > 1 ? (
                   <button
                     type="button"
@@ -725,11 +934,11 @@ function FeaturedProjectCard({
                   />
                 </div>
 
-                <div className="mx-auto flex h-[74vh] w-[22rem] max-w-full items-center justify-center overflow-hidden rounded-[22px] p-2 max-sm:h-[70vh] max-sm:w-[18.5rem] max-sm:max-w-full">
+                <div className="mx-auto flex max-h-[74vh] max-w-[min(100vw-8rem,70rem)] items-center justify-center overflow-hidden rounded-[22px] p-2 max-sm:max-h-[70vh] max-sm:max-w-[calc(100vw-5rem)]">
                   <img
                     src={featuredSnapshots[activeSnapshot]}
                     alt={`Quantum Nexus screenshot ${activeSnapshot + 1}`}
-                    className="block h-full w-full object-contain"
+                    className="block max-h-[calc(74vh-1rem)] max-w-full object-contain max-sm:max-h-[calc(70vh-1rem)]"
                     draggable="false"
                   />
                 </div>
@@ -774,10 +983,11 @@ function FeaturedProjectCard({
 function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
+  const [activeSnapshotProject, setActiveSnapshotProject] = useState(null);
   const filterRefs = useRef([]);
 
   useEffect(() => {
-    if (!isWorkflowModalOpen) {
+    if (!isWorkflowModalOpen && !activeSnapshotProject) {
       return undefined;
     }
 
@@ -787,7 +997,7 @@ function ProjectsSection() {
     return () => {
       document.body.style.overflow = previousOverflow;
     };
-  }, [isWorkflowModalOpen]);
+  }, [activeSnapshotProject, isWorkflowModalOpen]);
 
   const filteredProjects = useMemo(
     () =>
@@ -893,15 +1103,16 @@ function ProjectsSection() {
         />
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
         {gridProjects.map((project) => {
           const meta = getProjectMeta(project.type);
           const Icon = meta.icon;
+          const hasSnapshotGallery = Boolean(project.snapshotImages?.length);
 
           return (
             <article
               key={project.id}
-              className={`${projectSurfaceClass} w-full p-4 md:p-[1.1rem]`}
+              className={`${projectSurfaceClass} mb-4 inline-block w-full break-inside-avoid p-4 align-top md:p-[1.1rem]`}
             >
               <div className="flex flex-wrap items-center gap-2">
                 <span
@@ -914,9 +1125,22 @@ function ProjectsSection() {
                 <span className={subtleBadgeClass}>{project.engagement}</span>
               </div>
 
-              <h3 className="mt-3.5 mb-2 text-[1.08rem] font-bold text-[var(--text-strong)]">
-                {project.title}
-              </h3>
+              <div className="mt-3.5 mb-2 flex items-start justify-between gap-3">
+                <h3 className="m-0 text-[1.08rem] font-bold text-[var(--text-strong)]">
+                  {project.title}
+                </h3>
+                {project.externalUrl ? (
+                  <a
+                    href={project.externalUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)] transition-colors hover:bg-[var(--theme-toggle-hover-bg)]"
+                    aria-label={`Open ${project.title} external link`}
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                ) : null}
+              </div>
               <p className="m-0 text-[0.95rem] leading-7 text-[var(--text-muted)]">
                 {project.summary}
               </p>
@@ -932,13 +1156,24 @@ function ProjectsSection() {
               <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--project-panel-border)] pt-4">
                 <span className="inline-flex items-center gap-2 text-[0.84rem] font-semibold text-[var(--text-soft)]">
                   <Blocks className="h-4 w-4 text-[var(--button-subtle-text)]" />
-                  {project.sidePanel === "workflow"
+                  {hasSnapshotGallery
+                    ? "Image preview"
+                    : project.sidePanel === "workflow"
                     ? "Workflow preview"
                     : project.engagement === "Personal"
                       ? "Independent build"
                       : project.clientNote}
                 </span>
-                {project.sidePanel === "workflow" ? (
+                {hasSnapshotGallery ? (
+                  <button
+                    type="button"
+                    onClick={() => setActiveSnapshotProject(project)}
+                    className="inline-flex min-h-9 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-3 text-[0.78rem] font-semibold text-[var(--button-subtle-text)]"
+                    aria-label={`Open ${project.title} gallery`}
+                  >
+                    View Gallery
+                  </button>
+                ) : project.sidePanel === "workflow" ? (
                   <button
                     type="button"
                     onClick={() => setIsWorkflowModalOpen(true)}
@@ -958,6 +1193,13 @@ function ProjectsSection() {
         open={isWorkflowModalOpen}
         onClose={() => setIsWorkflowModalOpen(false)}
       />
+
+      {activeSnapshotProject?.snapshotImages?.length ? (
+        <SnapshotGalleryModal
+          project={activeSnapshotProject}
+          onClose={() => setActiveSnapshotProject(null)}
+        />
+      ) : null}
     </section>
   );
 }
