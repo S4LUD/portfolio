@@ -16,7 +16,7 @@ const initialFormState = {
   message: '',
 }
 
-function ContactSection({ onSubmitSuccess, sectionRef }) {
+function ContactSection({ sectionRef }) {
   const [formState, setFormState] = useState(initialFormState)
   const [submitState, setSubmitState] = useState({ type: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -145,7 +145,6 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
         type: 'success',
         message: 'Your message was sent successfully.',
       })
-      onSubmitSuccess?.('Your message was sent successfully.')
     } catch (error) {
       setSubmitState({
         type: 'error',
