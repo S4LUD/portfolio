@@ -1,8 +1,44 @@
-import { memo, useEffect, useState } from 'react'
+import { memo, type ReactNode, useEffect, useState } from 'react'
 import { Minus, Square, X } from 'lucide-react'
 import { surfaceClass, toneClasses } from '../shared/uiClasses'
 
-function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, children }) {
+type WorkflowTone = keyof typeof toneClasses
+
+type WorkflowNode = {
+  label: string
+  x: string
+  y: string
+  tone: WorkflowTone
+}
+
+type WorkflowLine = {
+  x1: string
+  y1: string
+  x2: string
+  y2: string
+}
+
+type Workflow = {
+  tall?: boolean
+  lines: WorkflowLine[]
+  nodes: WorkflowNode[]
+}
+
+type WorkflowShowcaseProps = {
+  workflow?: Workflow
+  className?: string
+  imageSrc?: string
+  imageSources?: string[]
+  children?: ReactNode
+}
+
+function WorkflowShowcase({
+  workflow,
+  className = '',
+  imageSrc,
+  imageSources,
+  children,
+}: WorkflowShowcaseProps) {
   const hasCustomContent = Boolean(children)
   const slides = imageSources?.length ? imageSources : imageSrc ? [imageSrc] : []
   const hasSlides = slides.length > 0
@@ -45,7 +81,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
             ? ''
             : hasSlides
               ? ''
-              : workflow.tall
+              : workflow?.tall
                 ? 'min-h-[23rem] max-sm:min-h-64'
                 : 'min-h-[19rem] max-sm:min-h-64'
         }`}
@@ -87,7 +123,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            {workflow.lines.map((line, index) => (
+            {workflow?.lines.map((line, index) => (
               <line
                 key={`${line.x1}-${line.y1}-${index}`}
                 x1={line.x1}
@@ -103,7 +139,7 @@ function WorkflowShowcase({ workflow, className = '', imageSrc, imageSources, ch
 
         {hasSlides || hasCustomContent
           ? null
-          : workflow.nodes.map((node) => (
+          : workflow?.nodes.map((node) => (
               <div
                 key={`${node.label}-${node.x}-${node.y}`}
                 className={`absolute z-[2] inline-flex min-h-[3.8rem] min-w-[7.3rem] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[0.15rem] rounded-[18px] px-4 py-[0.9rem] text-center text-[0.92rem] leading-[1.05] font-extrabold text-white shadow-[0_16px_28px_rgba(105,126,168,0.2)] max-sm:min-h-12 max-sm:min-w-[5.5rem] max-sm:rounded-2xl max-sm:px-2 max-sm:py-[0.65rem] max-sm:text-[0.68rem] ${toneClasses[node.tone]}`}

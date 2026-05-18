@@ -257,7 +257,7 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
                   value={formState.message}
                   onChange={handleChange}
                   required
-                  rows="5"
+                  rows={5}
                   minLength={10}
                   maxLength={4000}
                   className="rounded-[15px] border border-[var(--panel-border)] bg-[var(--input-bg)] px-4 py-3 text-[var(--text-strong)] outline-hidden transition-shadow duration-200 focus:shadow-[0_0_0_3px_var(--input-focus-ring)]"

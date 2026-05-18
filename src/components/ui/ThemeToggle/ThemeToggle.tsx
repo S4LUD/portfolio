@@ -1,18 +1,25 @@
 import { ChevronDown, LaptopMinimal, MoonStar, SunMedium } from 'lucide-react'
-import { memo, useEffect, useMemo, useRef, useState } from 'react'
+import { memo, type KeyboardEvent as ReactKeyboardEvent, useEffect, useMemo, useRef, useState } from 'react'
 import { toolbarPanelClass } from '../shared/uiClasses'
+
+type ThemeValue = 'light' | 'dark' | 'system'
 
 const themeOptions = [
   { value: 'light', label: 'Light', icon: SunMedium },
   { value: 'dark', label: 'Dark', icon: MoonStar },
   { value: 'system', label: 'System', icon: LaptopMinimal },
-]
+] as const
 
-function ThemeToggle({ value, onChange }) {
+type ThemeToggleProps = {
+  value: ThemeValue
+  onChange: (value: ThemeValue) => void
+}
+
+function ThemeToggle({ value, onChange }: ThemeToggleProps) {
   const [open, setOpen] = useState(false)
-  const rootRef = useRef(null)
-  const triggerRef = useRef(null)
-  const menuRef = useRef(null)
+  const rootRef = useRef<HTMLDivElement | null>(null)
+  const triggerRef = useRef<HTMLButtonElement | null>(null)
+  const menuRef = useRef<HTMLDivElement | null>(null)
 
   const activeOption = useMemo(
     () => themeOptions.find((option) => option.value === value) ?? themeOptions[2],
@@ -29,13 +36,13 @@ function ThemeToggle({ value, onChange }) {
       return undefined
     }
 
-    const handlePointerDown = (event) => {
-      if (!rootRef.current?.contains(event.target)) {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (event.target instanceof Node && !rootRef.current?.contains(event.target)) {
         setOpen(false)
       }
     }
 
-    const handleKeyDown = (event) => {
+    const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setOpen(false)
         triggerRef.current?.focus()
@@ -56,19 +63,21 @@ function ThemeToggle({ value, onChange }) {
       return undefined
     }
 
-    const focusTarget = menuRef.current?.querySelector('[role="menuitem"]')
+    const focusTarget = menuRef.current?.querySelector<HTMLButtonElement>('[role="menuitem"]')
     focusTarget?.focus()
 
     return undefined
   }, [open])
 
-  const handleMenuKeyDown = (event) => {
+  const handleMenuKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
     if (!menuRef.current) {
       return
     }
 
-    const menuItems = Array.from(menuRef.current.querySelectorAll('[role="menuitem"]'))
-    const currentIndex = menuItems.indexOf(document.activeElement)
+    const menuItems = Array.from(
+      menuRef.current.querySelectorAll<HTMLButtonElement>('[role="menuitem"]'),
+    )
+    const currentIndex = menuItems.indexOf(document.activeElement as HTMLButtonElement)
 
     if (!menuItems.length) {
       return
