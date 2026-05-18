@@ -120,7 +120,8 @@ function ContactSection({ sectionRef }) {
     if (!isDiscordContactConfigured) {
       setSubmitState({
         type: 'error',
-        message: 'Form submissions are not configured yet.',
+        message:
+          'Form submissions are not configured yet. Add VITE_DISCORD_CONTACT_WEBHOOK_URL to enable sending.',
       })
       return
     }
@@ -290,7 +291,7 @@ function ContactSection({ sectionRef }) {
                 <p className="m-0 rounded-[14px] bg-[#fff2f2] px-4 py-3 text-[0.9rem] text-[#be4d4d]">
                   {!contactSiteKey
                     ? 'Add VITE_CLOUDFLARE_SITE_KEY to enable the protected contact form.'
-                    : 'Contact submissions are routed through the Cloudflare contact endpoint.'}
+                    : 'Add VITE_DISCORD_CONTACT_WEBHOOK_URL to enable submissions.'}
                 </p>
               ) : null}
 
