@@ -357,10 +357,6 @@ function SnapshotGalleryModal({ onClose, project }) {
   const snapshots = useMemo(() => project.snapshotImages ?? [], [project.snapshotImages]);
 
   useEffect(() => {
-    setActiveSnapshot(0);
-  }, [project.id]);
-
-  useEffect(() => {
     if (snapshots.length <= 1 || isPaused) {
       return undefined;
     }
@@ -1196,6 +1192,7 @@ function ProjectsSection() {
 
       {activeSnapshotProject?.snapshotImages?.length ? (
         <SnapshotGalleryModal
+          key={activeSnapshotProject.id}
           project={activeSnapshotProject}
           onClose={() => setActiveSnapshotProject(null)}
         />

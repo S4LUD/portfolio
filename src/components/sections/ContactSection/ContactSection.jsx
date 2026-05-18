@@ -2,8 +2,10 @@ import { AlertCircle, Check, Copy, Download, Mail, MessageSquareQuote, Send } fr
 import { useCallback, useEffect, useRef, useState } from 'react'
 import cvFile from '../../../assets/Lance-Ivan-Salud-CV.pdf'
 import { contactDetails } from '../../../data/portfolioData'
-import { createContactInquiry } from '../../../lib/supabase/contactInquiries'
-import { isSupabaseConfigured } from '../../../lib/supabase/client'
+import {
+  isDiscordContactConfigured,
+  sendContactWebhook,
+} from '../../../lib/discord/contactWebhook'
 import TurnstileWidget from '../../ui/TurnstileWidget/TurnstileWidget'
 import { contentWidthClass } from '../../ui/shared/uiClasses'
 
@@ -28,7 +30,7 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
 
   const contactEmail = import.meta.env.VITE_CONTACT_EMAIL?.trim() || contactDetails.email
   const isPlaceholderEmail = contactEmail === contactDetails.email
-  const isContactFormConfigured = Boolean(contactSiteKey) && isSupabaseConfigured
+  const isContactFormConfigured = Boolean(contactSiteKey) && isDiscordContactConfigured
 
   const handleTurnstileExpired = useCallback(() => {
     setSubmitState({
@@ -115,11 +117,10 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
       return
     }
 
-    if (!isSupabaseConfigured) {
+    if (!isDiscordContactConfigured) {
       setSubmitState({
         type: 'error',
-        message:
-          'Form submissions are not configured yet. Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY to enable sending.',
+        message: 'Form submissions are not configured yet.',
       })
       return
     }
@@ -128,7 +129,7 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
     setSubmitState({ type: '', message: '' })
 
     try {
-      await createContactInquiry({
+      await sendContactWebhook({
         name: formState.name,
         email: formState.email,
         company: formState.company,
@@ -290,7 +291,7 @@ function ContactSection({ onSubmitSuccess, sectionRef }) {
                 <p className="m-0 rounded-[14px] bg-[#fff2f2] px-4 py-3 text-[0.9rem] text-[#be4d4d]">
                   {!contactSiteKey
                     ? 'Add VITE_CLOUDFLARE_SITE_KEY to enable the protected contact form.'
-                    : 'Add VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY to enable submissions.'}
+                    : 'Contact submissions are routed through the Cloudflare contact endpoint.'}
                 </p>
               ) : null}
 

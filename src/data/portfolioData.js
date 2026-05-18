@@ -17,8 +17,6 @@ export const contactDetails = {
   emailSubject: 'Portfolio Inquiry',
   emailBody:
     "Hi Lance,%0D%0A%0D%0AI'd love to connect about your automation and software work.%0D%0A%0D%0AThanks,",
-  formTable: 'contact_inquiries',
-  functionName: 'contact-inquiry',
 }
 
 export const projectFilters = ['All', 'Automation', 'Web', 'Mobile']
