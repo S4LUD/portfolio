@@ -167,9 +167,6 @@
     min-width: 320px;
     background: var(--app-bg);
     color: var(--text-strong);
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
   }
 
   a,
@@ -188,7 +185,67 @@
     display: block;
     max-width: 100%;
   }
+
+  :focus-visible {
+    outline: 3px solid var(--accent-strong);
+    outline-offset: 3px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
 @layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal[data-revealed="true"] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-gradient {
+    background-size: 200% 200%;
+    animation: hero-shift 14s ease-in-out infinite;
+  }
+
+  @keyframes hero-shift {
+    0%, 100% { background-position: 0% 50%; }
+    33% { background-position: 100% 50%; }
+    66% { background-position: 50% 0%; }
+  }
+}
+
+@layer utilities {
+  .animate-fill-in {
+    animation: fill-in 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fill-in {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .animate-count-up {
+    animation: count-up 1.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
 }

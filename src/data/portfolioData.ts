@@ -7,9 +7,9 @@ import quantumNexusDemo6 from '../assets/quantum-nexus/demo_image_6.jpg'
 import macroHokDemo1 from '../assets/macrohok/demo_image_1.png'
 
 export const heroStats = [
-  'Agile implementation from rough idea to working product.',
-  'Websites, mobile apps, and automation that actually ship.',
-  'Build fast, automate early, scale cleanly.',
+  '6+ projects delivered across mobile, web, and automation.',
+  'Healthcare platforms, payment integrations, and production apps.',
+  'From React Native to Zapier — built to ship, every time.',
 ]
 
 export const contactDetails = {
@@ -29,7 +29,7 @@ export const projects = [
     engagement: 'Corporate Experience',
     title: 'Medical Avenue Core',
     sidePanel: 'client-note',
-    clientNote: 'Limited public details.',
+    clientNote: 'Built under NDA for a healthcare client. Full case study available on request.',
     summary:
       'A healthcare web platform built to support secure account flows, structured operations, and production-ready admin experiences.',
     challenge:
@@ -39,6 +39,8 @@ export const projects = [
     outcome:
       'Delivered a stronger web foundation for healthcare operations, with clearer internal tooling and a more scalable application architecture.',
     stack: ['Next.js', 'Prisma', 'Supabase', 'Tailwind CSS', 'TypeScript'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
   {
     id: 'quantum-nexus',
@@ -64,6 +66,8 @@ export const projects = [
       quantumNexusDemo6,
     ],
     stack: ['React Native', 'Expo', 'Expo Router', 'TypeScript', 'Socket.IO'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
   {
     id: 'medical-avenue',
@@ -72,7 +76,7 @@ export const projects = [
     engagement: 'Corporate Experience',
     title: 'Medical Avenue',
     sidePanel: 'client-note',
-    clientNote: 'Limited public details.',
+    clientNote: 'Built under NDA for a healthcare client. Full case study available on request.',
     summary:
       'A healthcare mobile product built with React Native and Expo, combining patient-facing flows, native integrations, and production-ready mobile infrastructure.',
     challenge:
@@ -82,6 +86,8 @@ export const projects = [
     outcome:
       'Delivered a stronger mobile product foundation with secure access flows, native capabilities, and backend-connected patient experience workflows.',
     stack: ['React Native', 'Expo', 'Expo Router', 'Supabase', 'Firebase'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
   {
     id: 'ghl-xendit-backend-v2',
@@ -90,7 +96,7 @@ export const projects = [
     engagement: 'Freelance',
     title: 'Custom GHL Payment Method',
     sidePanel: 'client-note',
-    clientNote: 'Limited public details.',
+    clientNote: 'Built under NDA for a client.',
     summary:
       'A backend integration system connecting GoHighLevel and Xendit for OAuth, payments, webhooks, and branded checkout flows.',
     challenge:
@@ -100,6 +106,8 @@ export const projects = [
     outcome:
       'Delivered a stronger integration foundation for payment operations, subscription event delivery, and embedded checkout experiences.',
     stack: ['Bun', 'Express', 'Supabase', 'GoHighLevel', 'Xendit'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
   {
     id: 'zapier-intake-routing-system',
@@ -117,6 +125,8 @@ export const projects = [
     outcome:
       'Delivered a cleaner intake pipeline with more reliable data handling, conditional routing, internal alerts, and automated email follow-up.',
     stack: ['Zapier', 'Google Forms', 'Airtable', 'Slack', 'Gmail', 'JavaScript'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
   {
     id: 'macrohok',
@@ -136,5 +146,7 @@ export const projects = [
       'Delivered a reusable desktop automation utility with configurable macro behavior, saved presets, structured execution flow, and production-style packaging and test coverage.',
     snapshotImages: [macroHokDemo1],
     stack: ['Python', 'Tkinter', 'Pynput', 'PyDirectInput', 'PyGetWindow', 'PyInstaller'],
+    githubUrl: undefined,
+    demoUrl: undefined,
   },
 ]

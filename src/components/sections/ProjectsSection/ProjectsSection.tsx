@@ -19,6 +19,7 @@ import {
   subtleBadgeClass,
   subtlePanelClass,
 } from "../../ui/shared/uiClasses";
+import { useInView } from "../../../hooks/useInView";
 
 const projectTypeMeta = {
   Mobile: {
@@ -193,7 +194,6 @@ const automationWorkflowBranches = [
       { app: "Airtable", kind: "Update", title: "Update Record" },
       { app: "Airtable", kind: "Lookup", title: "Find Record" },
       { app: "Filter by Zapier", kind: "Filter", title: "Filter conditions" },
-      { app: "Airtable", kind: "Lookup", title: "Find Record" },
       { app: "Airtable", kind: "Update", title: "Update Record" },
     ],
   },
@@ -648,7 +648,7 @@ function FeaturedProjectCard({
   return (
     <>
       <article
-        className={`${projectSurfaceClass} relative mb-4 overflow-hidden p-5 max-sm:p-4`}
+        className={`${projectSurfaceClass} relative mb-4 overflow-hidden p-5 transition-all duration-350 hover:-translate-y-1.5 hover:shadow-[0_28px_56px_var(--project-panel-shadow)] max-sm:p-4`}
       >
         <div
           style={{
@@ -976,11 +976,101 @@ function FeaturedProjectCard({
   );
 }
 
+function GridProjectCard({ project, index }) {
+  const [cardRef, cardInView] = useInView({ threshold: 0.05 });
+  const meta = getProjectMeta(project.type);
+  const Icon = meta.icon;
+  const hasSnapshotGallery = Boolean(project.snapshotImages?.length);
+
+  return (
+    <article
+      ref={cardRef}
+      data-revealed={cardInView}
+      className={`${projectSurfaceClass} reveal mb-4 inline-block w-full break-inside-avoid p-4 align-top transition-all duration-350 hover:-translate-y-1.5 hover:scale-[1.01] hover:shadow-[0_28px_56px_var(--project-panel-shadow)] md:p-[1.1rem]`}
+      style={{ transitionDelay: `${(index % 6) * 80}ms` }}
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <span
+          className={`inline-flex h-9 w-9 items-center justify-center rounded-[14px] ${meta.iconClass}`}
+          style={{ backgroundImage: meta.badgeVar }}
+        >
+          <Icon className="h-4.5 w-4.5" />
+        </span>
+        <span className={strongBadgeClass}>{project.type}</span>
+        <span className={subtleBadgeClass}>{project.engagement}</span>
+      </div>
+
+      <div className="mt-3.5 mb-2 flex items-start justify-between gap-3">
+        <h3 className="m-0 text-[1.08rem] font-bold text-[var(--text-strong)]">
+          {project.title}
+        </h3>
+        <div className="flex shrink-0 items-center gap-1.5">
+          {project.githubUrl ? (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)] transition-colors hover:bg-[var(--theme-toggle-hover-bg)]"
+              aria-label={`${project.title} GitHub repository`}
+            >
+              <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+              </svg>
+            </a>
+          ) : null}
+          {project.externalUrl ? (
+            <a
+              href={project.externalUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)] transition-colors hover:bg-[var(--theme-toggle-hover-bg)]"
+              aria-label={`${project.title} external link`}
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
+          ) : null}
+        </div>
+      </div>
+      <p className="m-0 text-[0.95rem] leading-7 text-[var(--text-muted)]">
+        {project.summary}
+      </p>
+
+      <div className="mt-3.5 flex flex-wrap gap-2">
+        {project.stack.map((item, stackIndex) => (
+          <span
+            key={item}
+            className={`${chipClass} transition-all duration-300`}
+            style={{
+              transitionDelay: cardInView ? `${stackIndex * 40}ms` : '0ms',
+            }}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--project-panel-border)] pt-4">
+        <span className="inline-flex items-center gap-2 text-[0.84rem] font-semibold text-[var(--text-soft)]">
+          <Blocks className="h-4 w-4 text-[var(--button-subtle-text)]" />
+          {hasSnapshotGallery
+            ? "Image preview"
+            : project.sidePanel === "workflow"
+            ? "Workflow preview"
+            : project.engagement === "Personal"
+              ? "Independent build"
+              : project.clientNote}
+        </span>
+      </div>
+    </article>
+  );
+}
+
 function ProjectsSection() {
   const [activeFilter, setActiveFilter] = useState("All");
   const [isWorkflowModalOpen, setIsWorkflowModalOpen] = useState(false);
   const [activeSnapshotProject, setActiveSnapshotProject] = useState(null);
   const filterRefs = useRef([]);
+  const [sectionRef, sectionInView] = useInView({ threshold: 0.05 });
 
   useEffect(() => {
     if (!isWorkflowModalOpen && !activeSnapshotProject) {
@@ -1049,17 +1139,24 @@ function ProjectsSection() {
 
   return (
     <section
+      id="projects"
+      ref={sectionRef}
       className={`relative px-3 sm:px-4 md:px-5 ${contentWidthClass}`}
     >
-      <div className="mb-4">
+      <div
+        className="reveal mb-4"
+        data-revealed={sectionInView}
+        style={{ transitionDelay: '0ms' }}
+      >
         <h2 className={`${sectionTitleClass} max-w-[40rem]`}>
-          Automation systems, web apps, and mobile products built for real-world
-          execution.
+          Live projects across mobile, web, and automation.
         </h2>
       </div>
 
       <div
-        className="mb-4 flex flex-wrap gap-2.5"
+        className="reveal mb-4 flex flex-wrap gap-2.5"
+        data-revealed={sectionInView}
+        style={{ transitionDelay: '100ms' }}
         role="toolbar"
         aria-label="Project filters"
       >
@@ -1077,7 +1174,7 @@ function ProjectsSection() {
               onClick={() => setActiveFilter(filter)}
               onKeyDown={(event) => handleFilterKeyDown(event, filterIndex)}
               aria-pressed={isActive}
-              className={`inline-flex min-h-10 items-center justify-center rounded-full px-4 text-[0.85rem] font-semibold focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--app-bg)] ${
+              className={`inline-flex min-h-10 items-center justify-center rounded-full px-4 text-[0.85rem] font-semibold transition-all duration-300 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--app-bg)] ${
                 isActive
                   ? "bg-[var(--button-primary-from)] text-white shadow-[0_10px_20px_var(--button-primary-shadow)]"
                   : "bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] hover:bg-[var(--theme-toggle-hover-bg)]"
@@ -1100,89 +1197,9 @@ function ProjectsSection() {
       ) : null}
 
       <div className="columns-1 gap-4 md:columns-2 xl:columns-3">
-        {gridProjects.map((project) => {
-          const meta = getProjectMeta(project.type);
-          const Icon = meta.icon;
-          const hasSnapshotGallery = Boolean(project.snapshotImages?.length);
-
-          return (
-            <article
-              key={project.id}
-              className={`${projectSurfaceClass} mb-4 inline-block w-full break-inside-avoid p-4 align-top md:p-[1.1rem]`}
-            >
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className={`inline-flex h-9 w-9 items-center justify-center rounded-[14px] ${meta.iconClass}`}
-                  style={{ backgroundImage: meta.badgeVar }}
-                >
-                  <Icon className="h-4.5 w-4.5" />
-                </span>
-                <span className={strongBadgeClass}>{project.type}</span>
-                <span className={subtleBadgeClass}>{project.engagement}</span>
-              </div>
-
-              <div className="mt-3.5 mb-2 flex items-start justify-between gap-3">
-                <h3 className="m-0 text-[1.08rem] font-bold text-[var(--text-strong)]">
-                  {project.title}
-                </h3>
-                {project.externalUrl ? (
-                  <a
-                    href={project.externalUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] text-[var(--button-subtle-text)] shadow-[inset_0_1px_0_var(--project-panel-inset)] transition-colors hover:bg-[var(--theme-toggle-hover-bg)]"
-                    aria-label={`Open ${project.title} external link`}
-                  >
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                ) : null}
-              </div>
-              <p className="m-0 text-[0.95rem] leading-7 text-[var(--text-muted)]">
-                {project.summary}
-              </p>
-
-              <div className="mt-3.5 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span key={item} className={chipClass}>
-                    {item}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-4 flex items-center justify-between gap-3 border-t border-[var(--project-panel-border)] pt-4">
-                <span className="inline-flex items-center gap-2 text-[0.84rem] font-semibold text-[var(--text-soft)]">
-                  <Blocks className="h-4 w-4 text-[var(--button-subtle-text)]" />
-                  {hasSnapshotGallery
-                    ? "Image preview"
-                    : project.sidePanel === "workflow"
-                    ? "Workflow preview"
-                    : project.engagement === "Personal"
-                      ? "Independent build"
-                      : project.clientNote}
-                </span>
-                {hasSnapshotGallery ? (
-                  <button
-                    type="button"
-                    onClick={() => setActiveSnapshotProject(project)}
-                    className="inline-flex min-h-9 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-3 text-[0.78rem] font-semibold text-[var(--button-subtle-text)]"
-                    aria-label={`Open ${project.title} gallery`}
-                  >
-                    View Gallery
-                  </button>
-                ) : project.sidePanel === "workflow" ? (
-                  <button
-                    type="button"
-                    onClick={() => setIsWorkflowModalOpen(true)}
-                    className="inline-flex min-h-9 items-center justify-center rounded-full bg-[var(--button-subtle-bg)] px-3 text-[0.78rem] font-semibold text-[var(--button-subtle-text)]"
-                    aria-label="Open workflow preview"
-                  >
-                    View Flow
-                  </button>
-                ) : null}
-              </div>
-            </article>
-          );
-        })}
+        {gridProjects.map((project, index) => (
+          <GridProjectCard key={project.id} project={project} index={index} />
+        ))}
       </div>
 
       <WorkflowPreviewModal
