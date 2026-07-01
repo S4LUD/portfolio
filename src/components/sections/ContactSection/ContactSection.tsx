@@ -412,7 +412,7 @@ function ContactSection({ sectionRef }) {
                     </svg>
                   </a>
                   <a
-                    href="https://linkedin.com/in/lanceivansalud"
+                    href="https://www.linkedin.com/in/lance-ivan-salud-429968234"
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--input-bg)] text-[var(--text-soft)] shadow-[inset_0_0_0_1px_var(--panel-border)] transition-colors duration-200 hover:bg-[var(--theme-toggle-hover-bg)] focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-[var(--accent-strong)]"
