@@ -68,6 +68,7 @@ export const projects = [
     stack: ['React Native', 'Expo', 'Expo Router', 'TypeScript', 'Socket.IO'],
     githubUrl: undefined,
     demoUrl: undefined,
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.miruza.quantumnexus&hl=en',
   },
   {
     id: 'medical-avenue',
