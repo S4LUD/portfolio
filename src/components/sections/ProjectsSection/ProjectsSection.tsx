@@ -46,6 +46,12 @@ const projectTypeMeta = {
 };
 
 const featuredFocusPoints = {
+  "crewza": [
+    "Expo mobile",
+    "Subscriptions",
+    "Messaging",
+    "Admin CRM",
+  ],
   "quantum-nexus": [
     "Game systems",
     "AI turns",

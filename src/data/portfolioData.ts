@@ -5,10 +5,11 @@ import quantumNexusDemo4 from '../assets/quantum-nexus/demo_image_4.jpg'
 import quantumNexusDemo5 from '../assets/quantum-nexus/demo_image_5.jpg'
 import quantumNexusDemo6 from '../assets/quantum-nexus/demo_image_6.jpg'
 import macroHokDemo1 from '../assets/macrohok/demo_image_1.png'
+import crewzaLogo from '../assets/crewza-logo.png'
 
 export const heroStats = [
-  '6+ projects delivered across mobile, web, and automation.',
-  'Healthcare platforms, payment integrations, and production apps.',
+  '7+ projects delivered across mobile, web, and automation.',
+  'Construction marketplace, healthcare platforms, payment integrations, and game systems.',
   'From React Native to Zapier — built to ship, every time.',
 ]
 
@@ -22,6 +23,26 @@ export const contactDetails = {
 export const projectFilters = ['All', 'Automation', 'Web', 'Mobile']
 
 export const projects = [
+  {
+    id: 'crewza',
+    featured: true,
+    type: 'Mobile',
+    engagement: 'Personal',
+    title: 'Crewza',
+    sidePanel: 'client-note',
+    clientNote: 'A full-stack construction marketplace platform currently in active development.',
+    summary:
+      'A construction marketplace and business operations platform with Expo React Native mobile app for builders and trades, a React/Vite web admin, and a Bun/Hono backend with Supabase.',
+    challenge:
+      'The platform needed to span mobile field workflows for builders/trades, a web admin portal with Builder CRM, and a scalable backend — all with subscriptions, messaging, quotes, schedules, and realtime sync.',
+    solution:
+      'Built with Expo Router 4 + React Native for mobile, React/Vite/Ant Design for web, and Bun/Hono/Supabase for the backend. Features include subscriptions, in-app messaging, scheduling, onboarding flows, and Firebase Cloud Messaging for notifications.',
+    outcome:
+      'Delivered a three-surface platform with production-ready mobile app, admin web portal, and API server. Integrates Supabase Auth, Postgres, Realtime, Storage, RevenueCat subscriptions, and PostHog analytics.',
+    stack: ['React Native', 'Expo', 'Expo Router', 'React', 'Vite', 'Bun', 'Hono', 'Supabase', 'TypeScript', 'Ant Design'],
+    githubUrl: undefined,
+    demoUrl: undefined,
+  },
   {
     id: 'medical-avenue-core',
     featured: false,
