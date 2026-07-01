@@ -13,8 +13,36 @@ const taglines = [
   'Mobile apps · Web platforms · Automation workflows.',
 ]
 
+function CyclingTagline() {
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % taglines.length)
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [])
+
+  return (
+    <span className="inline-grid relative overflow-hidden" style={{ minHeight: '1.8em' }}>
+      {taglines.map((line, index) => (
+        <span
+          key={line}
+          className="col-start-1 row-start-1 transition-all duration-500"
+          style={{
+            opacity: index === activeIndex ? 1 : 0,
+            transform: index === activeIndex ? 'translateY(0)' : index < activeIndex ? 'translateY(-8px)' : 'translateY(8px)',
+            pointerEvents: index === activeIndex ? 'auto' : 'none',
+          }}
+        >
+          {line}
+        </span>
+      ))}
+    </span>
+  )
+}
+
 function HeroSection({ themePreference, onThemeChange }) {
-  const [taglineIndex, setTaglineIndex] = useState(0)
   const [contentRef, contentInView] = useInView({ threshold: 0.2 })
   const [monogramRef, monogramInView] = useInView({ threshold: 0.5 })
 
@@ -81,11 +109,11 @@ function HeroSection({ themePreference, onThemeChange }) {
           </h1>
 
           <p
-            className="reveal mt-4 mb-4 max-w-[28rem] text-[1.02rem] leading-7 text-[var(--text-muted)] transition-opacity duration-500"
+            className="reveal mt-4 mb-4 max-w-[28rem] text-[1.02rem] leading-7 text-[var(--text-muted)]"
             data-revealed={contentInView}
             style={{ transitionDelay: '200ms' }}
           >
-            {taglines[taglineIndex]}
+            <CyclingTagline />
           </p>
 
           <ul className="mb-5 grid list-none gap-2.5 p-0">
