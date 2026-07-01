@@ -199,7 +199,7 @@ function ContactSection({ sectionRef }) {
         <div className="grid grid-cols-[minmax(0,1.3fr)_minmax(248px,0.7fr)] gap-3 max-md:grid-cols-1">
           <form
             onSubmit={handleSubmit}
-            className="reveal rounded-[20px] bg-[var(--modal-subtle-bg)] p-3.5 shadow-[inset_0_0_0_1px_var(--panel-border),0_10px_24px_var(--soft-shadow)]"
+            className="reveal rounded-[20px] border border-[var(--project-panel-border)] bg-[var(--project-panel-bg)] p-3.5 shadow-[inset_0_1px_0_var(--project-panel-inset)]"
             data-revealed={sectionInView}
             style={{ transitionDelay: '100ms' }}
           >
@@ -335,7 +335,7 @@ function ContactSection({ sectionRef }) {
 
           <div className="grid content-start gap-4">
             <div
-              className="reveal rounded-[20px] bg-[var(--modal-subtle-bg)] p-3.5 shadow-[inset_0_0_0_1px_var(--panel-border),0_10px_24px_var(--soft-shadow)]"
+              className="reveal rounded-[20px] border border-[var(--project-panel-border)] bg-[var(--project-panel-bg)] p-3.5 shadow-[inset_0_1px_0_var(--project-panel-inset)]"
               data-revealed={sectionInView}
               style={{ transitionDelay: '200ms' }}
             >
