@@ -7,6 +7,7 @@ import {
   ChevronRight,
   ExternalLink,
   Globe,
+  Server,
   Smartphone,
   X,
 } from "lucide-react";
@@ -40,6 +41,13 @@ const projectTypeMeta = {
     icon: Cable,
     iconClass: "text-[#8fd9bb]",
     profileLabel: "Integration system",
+    glowVar: "var(--project-glow-automation)",
+    badgeVar: "var(--project-badge-automation)",
+  },
+  Backend: {
+    icon: Server,
+    iconClass: "text-[#b794f4]",
+    profileLabel: "Backend system",
     glowVar: "var(--project-glow-automation)",
     badgeVar: "var(--project-badge-automation)",
   },
@@ -1120,7 +1128,10 @@ function ProjectsSection() {
     () =>
       activeFilter === "All"
         ? projects
-        : projects.filter((project) => project.type === activeFilter),
+        : projects.filter((project) => {
+            const types = project.types ?? [project.type]
+            return types.includes(activeFilter)
+          }),
     [activeFilter],
   );
 

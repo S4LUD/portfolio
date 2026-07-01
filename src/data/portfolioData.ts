@@ -20,13 +20,14 @@ export const contactDetails = {
     "Hi Lance,%0D%0A%0D%0AI'd love to connect about your automation and software work.%0D%0A%0D%0AThanks,",
 }
 
-export const projectFilters = ['All', 'Automation', 'Web', 'Mobile']
+export const projectFilters = ['All', 'Automation', 'Web', 'Mobile', 'Backend']
 
 export const projects = [
   {
     id: 'crewza',
     featured: true,
     type: 'Mobile',
+    types: ['Mobile', 'Web', 'Backend'],
     engagement: 'Personal',
     title: 'Crewza',
     sidePanel: 'client-note',
@@ -115,6 +116,7 @@ export const projects = [
     id: 'ghl-xendit-backend-v2',
     featured: false,
     type: 'Automation',
+    types: ['Automation', 'Backend'],
     engagement: 'Freelance',
     title: 'Custom GHL Payment Method',
     sidePanel: 'client-note',
