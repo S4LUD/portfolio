@@ -1012,7 +1012,7 @@ function GridProjectCard({ project, index }) {
     <article
       ref={cardRef}
       data-revealed={cardInView}
-      className={`${projectSurfaceClass} reveal mb-4 inline-block w-full break-inside-avoid p-4 align-top transition-all duration-350 hover:-translate-y-1.5 hover:scale-[1.01] hover:shadow-[0_28px_56px_var(--project-panel-shadow)] md:p-[1.1rem]`}
+      className={`${projectSurfaceClass} reveal mb-4 inline-block w-full break-inside-avoid p-4 align-top transition-all duration-350 hover:-translate-y-1.5 hover:shadow-[0_28px_56px_var(--project-panel-shadow)] md:p-[1.1rem]`}
       style={{ transitionDelay: `${(index % 6) * 80}ms` }}
     >
       <div className="flex flex-wrap items-center gap-2">

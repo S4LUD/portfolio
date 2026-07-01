@@ -42,8 +42,8 @@ function SkillBar({ label, level, color, index }) {
       <div className="flex items-center justify-between">
         <span className="text-[0.82rem] font-semibold text-[var(--text-soft)]">{label}</span>
         <span
-          className="text-[0.75rem] font-bold tabular-nums transition-opacity duration-500"
-          style={{ color, opacity: inView ? 1 : 0 }}
+          className="text-[0.75rem] font-bold tabular-nums text-[var(--text-muted)] transition-opacity duration-500"
+          style={{ opacity: inView ? 1 : 0 }}
         >
           {Math.round(level * 100)}%
         </span>
@@ -54,7 +54,7 @@ function SkillBar({ label, level, color, index }) {
           style={{
             width: inView ? `${level * 100}%` : '0%',
             backgroundColor: color,
-            opacity: 0.7,
+            opacity: 0.85,
             transitionDelay: `${index * 100}ms`,
           }}
         />
@@ -113,8 +113,8 @@ function SkillsSection() {
                 {category.items.map((item) => (
                   <span
                     key={item}
-                    className="inline-flex min-h-7 items-center rounded-full px-2.5 text-[0.75rem] font-semibold"
-                    style={{ backgroundColor: `${category.color}12`, color: category.color }}
+                    className="inline-flex min-h-7 items-center rounded-full px-2.5 text-[0.75rem] font-semibold text-[var(--text-soft)]"
+                    style={{ backgroundColor: `${category.color}18` }}
                   >
                     {item}
                   </span>
