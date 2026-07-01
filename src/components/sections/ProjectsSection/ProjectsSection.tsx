@@ -48,8 +48,8 @@ const projectTypeMeta = {
     icon: Server,
     iconClass: "text-[#b794f4]",
     profileLabel: "Backend system",
-    glowVar: "var(--project-glow-automation)",
-    badgeVar: "var(--project-badge-automation)",
+    glowVar: "var(--project-glow-web)",
+    badgeVar: "var(--project-badge-web)",
   },
 };
 

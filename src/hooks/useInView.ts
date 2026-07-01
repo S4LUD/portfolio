@@ -19,8 +19,16 @@ export function useInView<T extends HTMLElement = HTMLDivElement>({
     const el = ref.current
     if (!el) return
 
-    // If already visible and once, skip observer
-    if (once && inView) return
+    // Synchronous check — if already visible, set immediately to avoid flash
+    const rect = el.getBoundingClientRect()
+    const isVisible =
+      rect.top < window.innerHeight + parseInt(rootMargin.replace(/\D/g, '') || '0', 10) &&
+      rect.bottom > 0
+
+    if (isVisible) {
+      setInView(true)
+      if (once) return
+    }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -37,7 +45,6 @@ export function useInView<T extends HTMLElement = HTMLDivElement>({
     observer.observe(el)
 
     return () => observer.disconnect()
-    // We intentionally don't include inView so the observer is always set up fresh
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [threshold, rootMargin, once])
 
