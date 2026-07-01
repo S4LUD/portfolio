@@ -44,14 +44,6 @@ function CyclingTagline() {
 
 function HeroSection({ themePreference, onThemeChange }) {
   const [contentRef, contentInView] = useInView({ threshold: 0.2 })
-  const [monogramRef, monogramInView] = useInView({ threshold: 0.5 })
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTaglineIndex((current) => (current + 1) % taglines.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
     <section
@@ -83,22 +75,6 @@ function HeroSection({ themePreference, onThemeChange }) {
         </div>
 
         <div className="relative z-[1] flex flex-col justify-center py-4 sm:py-5 md:py-8">
-          <div
-            className="reveal"
-            data-revealed={contentInView}
-            style={{ transitionDelay: '0ms' }}
-          >
-            <span
-              ref={monogramRef}
-              className={`inline-flex h-12 w-12 items-center justify-center rounded-[16px] text-lg font-extrabold text-white transition-all duration-700 ${
-                monogramInView ? 'opacity-100 scale-100' : 'opacity-0 scale-75'
-              }`}
-              style={{ backgroundColor: 'var(--accent-strong)' }}
-              aria-hidden="true"
-            >
-              LS
-            </span>
-          </div>
 
           <h1
             className="reveal m-0 mt-3 max-w-none text-[2.8rem] leading-[0.95] font-bold tracking-[-0.05em] text-[var(--text-strong)] sm:text-[3.15rem] md:max-w-[8ch] md:text-[clamp(2.5rem,5vw,4.3rem)]"
